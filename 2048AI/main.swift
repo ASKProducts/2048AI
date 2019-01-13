@@ -33,22 +33,18 @@ func chooser(game: Game) -> (Int, Int) {
     return (maxDepth, samplingAmount)
 }
 
-/*let player = DynamicDepthEMPlayer(chooser: chooser)
-let game = BasicGame(numRows: 4, numCols: 4,
-                     startingProbabilities: [2: 1.0],
-                     scoreFunc: balanceScoreFunc)
-_ = player.playGame(game, printResult: true, printInterval: 1)
-*/
 
-/*let player = UserPlayer()
-_ = player.playGame(numRows: 4, numCols: 4,
-                    startingProbabiltiies: [2: 0.75, 4: 0.25],
-                    scoreFunc: {100*(blankSpaceScoreFunc(game: $0)+1)+balanceScoreFunc(game: $0)},
-                    printResult: true, printInterval: 1)*/
+let numberOfRuns = 3
 
 
-
-while true {
+for i in 0..<numberOfRuns {
+    print("Running 2048AI. Run \(i+1)/\(numberOfRuns)")
+    print("Player:")
+    print("     DynamicDepthEMPlayer(chooser: {_ in (5, 5)}, useCache: true)")
+    print("Game:")
+    print("     FastGame(startingProbabilities: [2: 1.0], scoreFunc: fastBalanceScoreFunc)")
+    
+    
     let player = DynamicDepthEMPlayer(chooser: {_ in (5, 5)}, useCache: true)
     let fastGame = FastGame(startingProbabilities: [2: 1.0],
                             scoreFunc: fastBalanceScoreFunc)
@@ -62,8 +58,12 @@ while true {
         }
     }
     print("Highest piece achieved: \(highestTile)")
+    print("Settings:")
+    print("Player:")
+    print("     DynamicDepthEMPlayer(chooser: {_ in (5, 5)}, useCache: true)")
+    print("Game:")
+    print("     FastGame(startingProbabilities: [2: 1.0], scoreFunc: fastBalanceScoreFunc)")
     
-    break
 }
 
 //total weights in original balance function:
