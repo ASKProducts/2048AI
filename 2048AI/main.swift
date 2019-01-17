@@ -37,6 +37,7 @@ func chooser(game: Game) -> (Int, Int) {
 let numberOfRuns = 3
 
 
+
 for i in 0..<numberOfRuns {
     print("Running 2048AI. Run \(i+1)/\(numberOfRuns)")
     print("Player:")
@@ -45,13 +46,16 @@ for i in 0..<numberOfRuns {
     print("     FastGame(startingProbabilities: [2: 1.0], scoreFunc: fastBalanceScoreFunc)")
     
     
-    let player = DynamicDepthEMPlayer(chooser: {_ in (2, 100)}, useCache: true)
+    let player = DynamicDepthEMPlayer(chooser: {_ in (2, 100)},
+                                      cache: DictionaryCache())
     let weights: [[Double]] = [[-100, -50, -25, 1],
                                [-50, -25, 1, 25],
                                [-25,  1,  35, 50],
                                [1, 25, 50, 100]]
     let fastGame = FastGame(startingProbabilities: [2: 1.0],
                             scoreFunc: FastWeightedScoreFunction(weights: weights))
+
+    
     _ = player.playGame(fastGame, printResult: true, printInterval: 1)
     var highestTile = 0
     for r in 0..<4{

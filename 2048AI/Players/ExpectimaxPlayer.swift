@@ -8,42 +8,27 @@
 
 import Foundation
 
-struct CacheEntry: Hashable {
-    let game: Game
-    let depth: Int
-}
 
 class ExpectimaxPlayer: Player{
     var maxDepth: Int
     var samplingAmount: Int
     
-    let useCache: Bool
-    var cache: [CacheEntry: Double] = [:]
+    var cache: Cache?
     
-    init(maxDepth: Int, samplingAmount: Int, useCache: Bool = false){
+    init(maxDepth: Int, samplingAmount: Int, cache: Cache? = nil){
         self.maxDepth = maxDepth
         self.samplingAmount = samplingAmount
-        self.useCache = useCache
+        self.cache = cache
+        super.init()
+        
+        cache?.initialize(player: self)
     }
     
     override func decide(game: Game) -> Move {
-        if useCache {
-            pruneCache(currentTurnNumber: game.turnNumber)
-        }
+        cache?.updateCache(turnNumber: game.turnNumber)
         return pi(game: game, depth: 0)
     }
     
-    func pruneCache(currentTurnNumber: Int){
-        var toRemoveKeys: [CacheEntry] = []
-        for (key, _) in cache {
-            if key.game.turnNumber < currentTurnNumber - maxDepth {
-                toRemoveKeys.append(key)
-            }
-        }
-        for key in toRemoveKeys {
-            cache.removeValue(forKey: key)
-        }
-    }
     
     func pi(game: Game, depth: Int) -> Move {
         
@@ -65,9 +50,8 @@ class ExpectimaxPlayer: Player{
     }
     
     func score(game: Game, depth: Int) -> Double {
-        if useCache{
-            let entry = CacheEntry(game: game, depth: depth)
-            if let bestScore = cache[entry] {
+        if let scoreCache = cache {
+            if let bestScore = scoreCache.getScore(game: game, depthRemaining: maxDepth - depth) {
                 return bestScore
             }
         }
@@ -91,11 +75,8 @@ class ExpectimaxPlayer: Player{
             fatalError("bestScore is nil after trasversing all moves")
         }
         
-        if useCache {
-            let entry = CacheEntry(game: game, depth: depth)
-            if cache[entry] == nil{
-                cache[entry] = score
-            }
+        if let scoreCache = cache {
+            scoreCache.storeResult(game: game, depthRemaining: maxDepth - depth, score: score)
         }
         
         return score
