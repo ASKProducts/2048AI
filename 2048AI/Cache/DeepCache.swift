@@ -8,3 +8,11 @@
 
 import Foundation
 
+//DeepCache requires the game to be a fastGame for efficient storage representation
+
+class DeepCache {
+    
+    let scoreFunc: ScoreFunction
+    
+    
+}

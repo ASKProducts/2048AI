@@ -30,13 +30,6 @@ class FastGame: Game {
         return self.board == otherFast.board
     }
     
-    /*override var description: String {
-        var str = super.description
-        str += "\n"
-        str += String(format: "Hex representation: %16llx", board)
-        return str
-    }*/
-    
     func getRow(_ r: Int) -> UInt16 {
         let mask: UInt64 = 0xFFFF000000000000 >> (r*4*4)
         let endShift: Int64 = Int64((3 - r)*4*4)
@@ -182,20 +175,6 @@ class FastGame: Game {
             shiftColUpTable[Int(row)] = shiftedRow
             shiftColDownTable[Int(reverseRow(row))] = reverseRow(shiftedRow)
             
-            for e in entries {
-                squareScoresTable[Int(row)] += Double(1 << e) * Double(1 << e)
-            }
-            
-            /*for i in 0..<4 {
-                let entry = (Int(row) >> (4*(3 - i))) & 0xF
-                balanceScoresTable[Int(row)] += fastBalanceWeights[i]*Double(1 << entry)
-            }*/
-            for r in 0..<4 {
-                for i in 0..<4 {
-                    let entry = (Int(row) >> (4*(3 - i))) & 0xF
-                    balanceScoresTable[r][Int(row)] += scoreWeights[r][i]*Double(1 << entry)
-                }
-            }
         }
         
         hasPrecomputedTables = true
