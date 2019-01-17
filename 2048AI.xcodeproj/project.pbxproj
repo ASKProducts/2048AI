@@ -24,6 +24,8 @@
 		573DBC9721DCCDD2005E8F4C /* DynamicDepthEMPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573DBC9621DCCDD1005E8F4C /* DynamicDepthEMPlayer.swift */; };
 		573DBC9921DD2BAA005E8F4C /* WashingMachinePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573DBC9821DD2BAA005E8F4C /* WashingMachinePlayer.swift */; };
 		57480C8A21D8ACBE00194FA0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57480C8921D8ACBE00194FA0 /* main.swift */; };
+		57D637DF21F0108C00348EFD /* DeepCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D637DE21F0108C00348EFD /* DeepCache.swift */; };
+		57D637E121F010EA00348EFD /* ScoreFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D637E021F010EA00348EFD /* ScoreFunction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,6 +59,8 @@
 		573DBC9821DD2BAA005E8F4C /* WashingMachinePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WashingMachinePlayer.swift; sourceTree = "<group>"; };
 		57480C8621D8ACBD00194FA0 /* 2048AI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = 2048AI; sourceTree = BUILT_PRODUCTS_DIR; };
 		57480C8921D8ACBE00194FA0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		57D637DE21F0108C00348EFD /* DeepCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepCache.swift; sourceTree = "<group>"; };
+		57D637E021F010EA00348EFD /* ScoreFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreFunction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,7 @@
 		573DBC9121DCB116005E8F4C /* ScoreFunctions */ = {
 			isa = PBXGroup;
 			children = (
+				57D637E021F010EA00348EFD /* ScoreFunction.swift */,
 				573DBC8221DB8FD4005E8F4C /* BalanceScoreFunction.swift */,
 				573DBC9221DCB13B005E8F4C /* PowerScoreFunctions.swift */,
 				573DBC9421DCB29B005E8F4C /* ClusterScoreFunction.swift */,
@@ -127,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				57480C8921D8ACBE00194FA0 /* main.swift */,
+				57D637DE21F0108C00348EFD /* DeepCache.swift */,
 				5720B43B21E2F50100BB770D /* Games */,
 				573DBC9121DCB116005E8F4C /* ScoreFunctions */,
 				573DBC8621DB902E005E8F4C /* Players */,
@@ -193,6 +199,7 @@
 			files = (
 				573DBC8C21DB90A4005E8F4C /* GreedyPlayer.swift in Sources */,
 				572FC74C21E42DC5000B56F7 /* FastScoreFunctions.swift in Sources */,
+				57D637DF21F0108C00348EFD /* DeepCache.swift in Sources */,
 				573DBC8521DB9003005E8F4C /* Player.swift in Sources */,
 				573DBC9521DCB29B005E8F4C /* ClusterScoreFunction.swift in Sources */,
 				573DBC8321DB8FD4005E8F4C /* BalanceScoreFunction.swift in Sources */,
@@ -206,6 +213,7 @@
 				573DBC8821DB903D005E8F4C /* UserPlayer.swift in Sources */,
 				57480C8A21D8ACBE00194FA0 /* main.swift in Sources */,
 				5720B43821DD923B00BB770D /* BlankSpaceScoreFunction.swift in Sources */,
+				57D637E121F010EA00348EFD /* ScoreFunction.swift in Sources */,
 				5720B43A21E2D13100BB770D /* FastGame.swift in Sources */,
 				573DBC8121DB8F62005E8F4C /* Game.swift in Sources */,
 			);

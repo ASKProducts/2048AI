@@ -47,7 +47,7 @@ for i in 0..<numberOfRuns {
     
     let player = DynamicDepthEMPlayer(chooser: {_ in (2, 100)}, useCache: true)
     let fastGame = FastGame(startingProbabilities: [2: 1.0],
-                            scoreFunc: fastBalanceScoreFunc)
+                            scoreFunc: BlankSpaceScoreFunction())
     _ = player.playGame(fastGame, printResult: true, printInterval: 1)
     var highestTile = 0
     for r in 0..<4{

@@ -8,33 +8,30 @@
 
 import Foundation
 
-func squareScoreFunc(game: Game) -> Double {
-    var score = 0.0
-    for r in 0..<game.numRows {
-        for c in 0..<game.numCols {
-            score += Double(game.piece(r, c)*game.piece(r, c))
+class SquareScoreFunction: ScoreFunction{
+    
+    override func calculateScore(of game: Game) -> Double {
+        var score = 0.0
+        for r in 0..<game.numRows {
+            for c in 0..<game.numCols {
+                score += Double(game.piece(r, c)*game.piece(r, c))
+            }
         }
+        
+        return score
     }
     
-    return score
 }
 
-
-
-func cubeScoreFunc(game: Game) -> Double {
-    var score = 0.0
-    for r in 0..<game.numRows {
-        for c in 0..<game.numCols {
-            score += Double(game.piece(r, c)*game.piece(r, c)*game.piece(r, c))
-        }
+class PowerScoreFunction: ScoreFunction {
+    
+    let exponent: Double
+    
+    init(exponent: Double) {
+        self.exponent = exponent
     }
     
-    return score
-}
-
-func powerScoreFunc(exponent: Double) -> ScoreFunc {
-    
-    func scoreFunc(game: Game) -> Double {
+    override func calculateScore(of game: Game) -> Double {
         var score = 0.0
         for r in 0..<game.numRows {
             for c in 0..<game.numCols {
@@ -45,5 +42,5 @@ func powerScoreFunc(exponent: Double) -> ScoreFunc {
         return score
     }
     
-    return scoreFunc
 }
+

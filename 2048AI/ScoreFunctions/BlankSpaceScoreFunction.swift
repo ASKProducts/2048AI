@@ -8,6 +8,8 @@
 
 import Foundation
 
-func blankSpaceScoreFunc(game: Game) -> Double {
-    return Double(game.availableSpots.count)
+class BlankSpaceScoreFunction: ScoreFunction{
+    override func calculateScore(of game: Game) -> Double {
+        return Double(game.availableSpots.count)
+    }
 }

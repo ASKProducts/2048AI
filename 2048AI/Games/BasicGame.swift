@@ -12,7 +12,7 @@ class BasicGame: Game {
     var board: [[Int]]
     
     
-    override init(numRows: Int = 4, numCols: Int = 4, startingProbabilities: [Int: Double], scoreFunc: @escaping ScoreFunc, fillAvailableSpots: Bool = true) {
+    override init(numRows: Int = 4, numCols: Int = 4, startingProbabilities: [Int: Double], scoreFunc: ScoreFunction, fillAvailableSpots: Bool = true) {
         board = Array(repeating: Array(repeating: 0, count: numCols), count: numRows)
         super.init(numRows: numRows, numCols: numCols, startingProbabilities: startingProbabilities, scoreFunc: scoreFunc, fillAvailableSpots: fillAvailableSpots)
     }

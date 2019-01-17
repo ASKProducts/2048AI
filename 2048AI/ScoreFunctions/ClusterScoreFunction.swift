@@ -8,26 +8,29 @@
 
 import Foundation
 
-func clusterScoreFunc(game: Game) -> Double {
-    var score = 0.0
-    var biggestSpot = Spot(0, 0)
-    var biggestPiece = -1
+class ClusterScoreFunction: ScoreFunction {
     
-    for r in 0..<game.numRows {
-        for c in 0..<game.numCols {
-            if game.piece(r, c) > biggestPiece {
-                biggestPiece = game.piece(r, c)
-                biggestSpot = Spot(r, c)
+    override func calculateScore(of game: Game) -> Double {
+        var score = 0.0
+        var biggestSpot = Spot(0, 0)
+        var biggestPiece = -1
+        
+        for r in 0..<game.numRows {
+            for c in 0..<game.numCols {
+                if game.piece(r, c) > biggestPiece {
+                    biggestPiece = game.piece(r, c)
+                    biggestSpot = Spot(r, c)
+                }
             }
         }
+        
+        for r in 0..<game.numRows {
+            for c in 0..<game.numCols {
+                let distToMax = Double(max(abs(r-biggestSpot.r), abs(c-biggestSpot.c)))
+                score += Double(game.piece(r, c))/pow(2.0, distToMax)
+            }
+        }
+        return score
     }
     
-    for r in 0..<game.numRows {
-        for c in 0..<game.numCols {
-            let distToMax = Double(max(abs(r-biggestSpot.r), abs(c-biggestSpot.c)))
-            score += Double(game.piece(r, c))/pow(2.0, distToMax)
-        }
-    }
-    return score
-
 }

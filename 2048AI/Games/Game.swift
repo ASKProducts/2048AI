@@ -8,8 +8,6 @@
 
 import Foundation
 
-typealias ScoreFunc = (Game) -> Double
-
 struct Move: Equatable {
     let dr: Int
     let dc: Int
@@ -57,9 +55,9 @@ class Game: CustomStringConvertible {
     
     var availableSpots: [Spot]
     let startingProbabilities: [Int: Double]
-    let scoreFunc: ScoreFunc
+    let scoreFunc: ScoreFunction
     
-    init(numRows: Int = 4, numCols: Int = 4, startingProbabilities: [Int: Double], scoreFunc: @escaping ScoreFunc, fillAvailableSpots: Bool = true) {
+    init(numRows: Int = 4, numCols: Int = 4, startingProbabilities: [Int: Double], scoreFunc: ScoreFunction, fillAvailableSpots: Bool = true) {
         self.numRows = numRows
         self.numCols = numCols
         self.startingProbabilities = startingProbabilities
@@ -104,7 +102,7 @@ class Game: CustomStringConvertible {
     
     
     var score: Double {
-        return self.scoreFunc(self)
+        return self.scoreFunc.calculateScore(of: self)
     }
     
     func duplicate() -> Game {

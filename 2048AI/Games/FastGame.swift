@@ -12,7 +12,7 @@ class FastGame: Game {
     
     var board: UInt64 = 0
     
-    init(startingProbabilities: [Int: Double], scoreFunc: @escaping ScoreFunc, fillAvailableSpots: Bool = true) {
+    init(startingProbabilities: [Int: Double], scoreFunc: ScoreFunction, fillAvailableSpots: Bool = true) {
         if !FastGame.hasPrecomputedTables {
             FastGame.precomputeTables()
         }

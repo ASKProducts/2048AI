@@ -8,19 +8,23 @@
 
 import Foundation
 
-func balanceScoreFunc(game: Game) -> Double {
-    var score = 0.0
-    for r in 0..<game.numRows {
-        for c in 0..<game.numCols {
-            
-            for r2 in r..<game.numRows {
-                for c2 in c..<game.numCols {
-                    score += Double( game.piece(r2, c2) - game.piece(r, c) )
+class BalanceScoreFunction: ScoreFunction {
+    
+    override func calculateScore(of game: Game) -> Double {
+        var score = 0.0
+        for r in 0..<game.numRows {
+            for c in 0..<game.numCols {
+                
+                for r2 in r..<game.numRows {
+                    for c2 in c..<game.numCols {
+                        score += Double( game.piece(r2, c2) - game.piece(r, c) )
+                    }
                 }
+                
             }
-            
         }
+        
+        return score
     }
     
-    return score
 }
