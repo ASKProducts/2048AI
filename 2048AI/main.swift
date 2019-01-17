@@ -45,10 +45,9 @@ for i in 0..<numberOfRuns {
     print("     FastGame(startingProbabilities: [2: 1.0], scoreFunc: fastBalanceScoreFunc)")
     
     
-    let player = DynamicDepthEMPlayer(chooser: {_ in (5, 5)}, useCache: true)
+    let player = DynamicDepthEMPlayer(chooser: {_ in (2, 100)}, useCache: true)
     let fastGame = FastGame(startingProbabilities: [2: 1.0],
                             scoreFunc: fastBalanceScoreFunc)
-    let basicGame = BasicGame(numRows: 4, numCols: 4, startingProbabilities: [2: 1.0], scoreFunc: balanceScoreFunc)
     _ = player.playGame(fastGame, printResult: true, printInterval: 1)
     var highestTile = 0
     for r in 0..<4{
@@ -57,12 +56,8 @@ for i in 0..<numberOfRuns {
             if piece > highestTile { highestTile = piece }
         }
     }
-    print("Highest piece achieved: \(highestTile)")
-    print("Settings:")
-    print("Player:")
-    print("     DynamicDepthEMPlayer(chooser: {_ in (5, 5)}, useCache: true)")
-    print("Game:")
-    print("     FastGame(startingProbabilities: [2: 1.0], scoreFunc: fastBalanceScoreFunc)")
+    print("Highest piece achieved: \(highestTile)\n\n")
+
     
 }
 

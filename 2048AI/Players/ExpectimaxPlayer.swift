@@ -49,12 +49,13 @@ class ExpectimaxPlayer: Player{
         
         let moves = Move.mainMoves
         var bestMove = Move.nothing
-        var bestScore = -1.0
+        var bestScore: Double? = nil
         
         for move in moves{
             if !game.canMove(move) { continue }
+            
             let score = V(game: game, move: move, depth: depth)
-            if score > bestScore {
+            if bestScore == nil || score > bestScore! {
                 bestScore = score
                 bestMove = move
             }
@@ -76,22 +77,28 @@ class ExpectimaxPlayer: Player{
         }
         
         let moves = Move.mainMoves
-        var bestScore = -1.0
+        var bestScore: Double? = nil
         
         for move in moves{
             if !game.canMove(move) { continue }
-            let score = V(game: game, move: move, depth: depth + 1)
-            if score > bestScore {
+            let score = self.V(game: game, move: move, depth: depth + 1)
+            if bestScore == nil || score > bestScore! { //force-unwrapping is okay here
                 bestScore = score
             }
         }
         
-        if useCache {
-            let entry = CacheEntry(game: game, depth: depth)
-            cache.updateValue(bestScore, forKey: entry)
+        guard let score = bestScore else{
+            fatalError("bestScore is nil after trasversing all moves")
         }
         
-        return bestScore
+        if useCache {
+            let entry = CacheEntry(game: game, depth: depth)
+            if cache[entry] == nil{
+                cache[entry] = score
+            }
+        }
+        
+        return score
         
     }
     
