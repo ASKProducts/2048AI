@@ -10,7 +10,8 @@ import Foundation
 
 protocol Cache {
     
-    func initialize(player: ExpectimaxPlayer)
+    //called at the start of playGame
+    func initialize(player: ExpectimaxPlayer, game: Game)
     
     //returns nil if (game, depthRemaining) is not in the cache
     func getScore(game: Game, depthRemaining: Int) -> Double?
@@ -18,7 +19,10 @@ protocol Cache {
     func storeResult(game: Game, depthRemaining: Int, score: Double)
     
     //called at the start of every turn to run maintanence on the cache if necessary (e.g. pruning)
-    func updateCache(turnNumber: Int)
+    func updateCache(game: Game)
+    
+    //called at the end of the game
+    func endGame()
     
 }
 

@@ -13,6 +13,9 @@ class ExpectimaxPlayer: Player{
     var maxDepth: Int
     var samplingAmount: Int
     
+    var hits = 0
+    var totalHits = 0
+    
     var cache: Cache?
     
     init(maxDepth: Int, samplingAmount: Int, cache: Cache? = nil){
@@ -21,12 +24,17 @@ class ExpectimaxPlayer: Player{
         self.cache = cache
         super.init()
         
-        cache?.initialize(player: self)
     }
     
     override func decide(game: Game) -> Move {
-        cache?.updateCache(turnNumber: game.turnNumber)
-        return pi(game: game, depth: 0)
+        cache?.updateCache(game: game)
+        hits = 0
+        let choice = pi(game: game, depth: 0)
+        if cache != nil {
+            print("Hits: \(hits)")
+            print("Average hits per turn: \(Double(totalHits)/Double(game.turnNumber))")
+        }
+        return choice
     }
     
     
@@ -50,15 +58,18 @@ class ExpectimaxPlayer: Player{
     }
     
     func score(game: Game, depth: Int) -> Double {
+        hits += 1
+        totalHits += 1
+        
+        if depth == maxDepth || game.isGameOver(){
+            return game.score
+        }
         if let scoreCache = cache {
             if let bestScore = scoreCache.getScore(game: game, depthRemaining: maxDepth - depth) {
                 return bestScore
             }
         }
         
-        if depth == maxDepth || game.isGameOver(){
-            return game.score
-        }
         
         let moves = Move.mainMoves
         var bestScore: Double? = nil
@@ -76,6 +87,8 @@ class ExpectimaxPlayer: Player{
         }
         
         if let scoreCache = cache {
+            hits += 1
+            totalHits += 1
             scoreCache.storeResult(game: game, depthRemaining: maxDepth - depth, score: score)
         }
         
@@ -104,6 +117,16 @@ class ExpectimaxPlayer: Player{
         }
         
         return value
+    }
+    
+    override func playGame(_ game: Game, printResult: Bool, printInterval: Int, moveLimit: Int? = nil) -> Double {
+        cache?.initialize(player: self, game: game)
+        
+        let res = super.playGame(game, printResult: printResult, printInterval: printInterval, moveLimit: moveLimit)
+        
+        cache?.endGame()
+        
+        return res
     }
     
 }

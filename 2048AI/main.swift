@@ -34,8 +34,14 @@ func chooser(game: Game) -> (Int, Int) {
 }
 
 
-let numberOfRuns = 3
+let numberOfRuns = 1
+/*
+let file = FileHandle(forWritingAtPath: "TMPCACHE(2_1.0_)(FastWeighted_-100.0_-50.0_-25.0_1.0_-50.0_-25.0_1.0_25.0_-25.0_1.0_35.0_50.0_1.0_25.0_50.0_100.0_).cache")
 
+file?.write("poop".data(using: .utf8)!)
+
+
+exit(0)*/
 
 
 for i in 0..<numberOfRuns {
@@ -46,17 +52,17 @@ for i in 0..<numberOfRuns {
     print("     FastGame(startingProbabilities: [2: 1.0], scoreFunc: fastBalanceScoreFunc)")
     
     
+    //let cache = FileCache(cacheID: "moves100depth3", storageDepthCap: 3, pruneInterval: 1, writeToFile: false, writeInterval: 1)
+    let cache = DictionaryCache()
     let player = DynamicDepthEMPlayer(chooser: {_ in (2, 100)},
-                                      cache: DictionaryCache())
-    let weights: [[Double]] = [[-100, -50, -25, 1],
-                               [-50, -25, 1, 25],
-                               [-25,  1,  35, 50],
-                               [1, 25, 50, 100]]
+                                      cache: cache)
+    let weights: [[Double]] = [[-100, -50, -25,   1],
+                               [ -50, -25,   1,  30],
+                               [ -25,   1,  40,  60],
+                               [   1,  25,  50, 100]]
     let fastGame = FastGame(startingProbabilities: [2: 1.0],
                             scoreFunc: FastWeightedScoreFunction(weights: weights))
-
-    
-    _ = player.playGame(fastGame, printResult: true, printInterval: 1)
+    _ = player.playGame(fastGame, printResult: true, printInterval: 1, moveLimit: nil)
     var highestTile = 0
     for r in 0..<4{
         for c in 0..<4 {
@@ -69,13 +75,3 @@ for i in 0..<numberOfRuns {
     
 }
 
-//total weights in original balance function:
-
-/*
- [-15,    -10,    -5,    0],
-[ -10,    -5,    0,    5],
-[ -5,    0,    5,    10],
-[ 0,    5,    10,   15]
- 
- 
- */

@@ -47,6 +47,19 @@ class FastGame: Game {
         return UInt16(col)
     }
     
+    static func boardSum(_ board: UInt64) -> Int {
+        var mutableBoard = board
+        var sum = 0
+        for _ in 0..<64 {
+            let entry = mutableBoard & 0xF
+            if entry != 0 {
+                sum += Int(1 << entry)
+            }
+            mutableBoard >>= 4
+        }
+        return sum
+    }
+    
     func pieceExponent(_ r: Int, _ c: Int) -> Int {
         let row = Int(getRow(r))
         return (row >> (4*(3 - c))) & 0xF
@@ -98,22 +111,6 @@ class FastGame: Game {
     static var shiftRowLeftTable: [UInt16] = []
     static var shiftColUpTable: [UInt16] = []
     static var shiftColDownTable: [UInt16] = []
-    static var squareScoresTable: [Double] = []
-    static var balanceScoresTable: [[Double]] = []
-    
-    static var scoreWeights: [[Double]] =        [[-100, -50, -25, 1],
-                                                 [-50, -25, 1, 25],
-                                                 [-25,  1,  35, 50],
-                                                 [1, 25, 50, 100]]
-    
-/* original weights:
- 
- [[-15.0,-10.0, -5.0,  0.0],
- [-10.0, -5.0,  0.0,  5.0],
- [ -5.0,  0.0,  5.0, 10.0],
- [  0.0,  5.0, 10.0, 15.0]]
- 
- */
     
     static var hasPrecomputedTables = false
     
@@ -123,9 +120,7 @@ class FastGame: Game {
         shiftRowLeftTable = [UInt16](repeating: 0, count: 0xFFFF+1)
         shiftColUpTable = [UInt16](repeating: 0, count: 0xFFFF+1)
         shiftColDownTable = [UInt16](repeating: 0, count: 0xFFFF+1)
-        squareScoresTable = [Double](repeating: 0.0, count: 0xFFFF+1)
-        balanceScoresTable = [[Double]](repeating: [Double](repeating: 0.0, count: 0xFFFF+1), count: 4)
-        
+       
         for row in UInt16(0)...UInt16(0xFFFF) {
             //will make the move to the left, and fill every other entry out accordingly
             

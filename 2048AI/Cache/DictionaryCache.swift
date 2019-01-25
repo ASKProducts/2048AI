@@ -15,15 +15,13 @@ struct DictionaryCacheEntry: Hashable {
     let depthRemaining: Int
 }
 
-
-
 class DictionaryCache: Cache {
-    
     
     var cache: [DictionaryCacheEntry: Double] = [:]
     var player: ExpectimaxPlayer? = nil
     
-    func initialize(player: ExpectimaxPlayer) {
+    
+    func initialize(player: ExpectimaxPlayer, game: Game) {
         self.player = player
     }
     
@@ -35,14 +33,14 @@ class DictionaryCache: Cache {
         cache[DictionaryCacheEntry(game: game, depthRemaining: depthRemaining)] = score
     }
     
-    func updateCache(turnNumber: Int) {
+    func updateCache(game: Game) {
         var toRemoveKeys: [DictionaryCacheEntry] = []
         guard let player = self.player else {
             fatalError("player was never initialized")
         }
         
         for (key, _) in cache {
-            if key.game.turnNumber < turnNumber - player.maxDepth {
+            if key.game.turnNumber < game.turnNumber - player.maxDepth {
                 toRemoveKeys.append(key)
             }
         }
@@ -51,6 +49,9 @@ class DictionaryCache: Cache {
         }
     }
     
+    func endGame() {
+        //nothing to close
+    }
     
 }
 

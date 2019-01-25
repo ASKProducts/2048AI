@@ -28,3 +28,16 @@ class BalanceScoreFunction: ScoreFunction {
     }
     
 }
+
+
+//turns out this is just a weighted score function with the following weights:
+
+/*
+ [-15,    -10,    -5,    0],
+ [ -10,    -5,    0,    5],
+ [ -5,    0,    5,    10],
+ [ 0,    5,    10,   15]
+ 
+ 
+ */
+

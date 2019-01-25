@@ -24,6 +24,7 @@ class StreamReader {
         self.encoding = encoding
         buffer = Data(capacity: chunkSize)
         delimPattern = delimeter.data(using: .utf8)!
+        
     }
     
     deinit {

@@ -1,0 +1,5 @@
+This is a list of all cacheIDs and their purposes
+
+"": This is the default cache for general use
+"moves<X>depth<Y>": This is the cache where we train it only up to turn number X and it only stores results of depth <= Y
+"depth<Y>": Only stores results of depth <= Y

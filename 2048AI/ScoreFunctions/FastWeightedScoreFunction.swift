@@ -9,41 +9,29 @@
 import Foundation
 
 
-//FastWeightedScoreFunction is a score function that works in the same way as WeightedScoreFunction, but requires game to be a FastGame and so can precompute all the desired score values on the rows to make for faster computation
-class FastWeightedScoreFunction: ScoreFunction{
+class FastWeightedScoreFunction: FastScoreFunction{
     
     let weights: [[Double]]
     
     init(weights: [[Double]]) {
         self.weights = weights
         super.init()
-        
-        precomputeTables()
     }
     
-    var scoresTable: [[Double]] = []
-    
-    func precomputeTables() {
-        scoresTable = [[Double]](repeating: [Double](repeating: 0.0, count: 0xFFFF+1), count: 4)
+    override func rowScore(row: Int, entries: [Double]) -> Double {
         
-        for row in UInt16(0)...UInt16(0xFFFF) {
-            for r in 0..<4 {
-                for i in 0..<4 {
-                    let entry = (Int(row) >> (4*(3 - i))) & 0xF
-                    scoresTable[r][Int(row)] += weights[r][i]*Double(1 << entry)
-                }
-            }
-        }
-    }
-    
-    override func calculateScore(of game: Game) -> Double {
-        let fastGame = game as! FastGame
+        return zip(self.weights[row], entries).map{$0.0 * $0.1}.reduce(0.0, +)
+        
+        //traditional way:
+        /*
         var score = 0.0
-        score += scoresTable[0][Int(fastGame.getRow(0))]
-        score += scoresTable[1][Int(fastGame.getRow(1))]
-        score += scoresTable[2][Int(fastGame.getRow(2))]
-        score += scoresTable[3][Int(fastGame.getRow(3))]
-        return score
+        for i in 0..<4 {
+            score += self.weights[row][i]*entries[i]
+        }
+        return score*/
+        
+        //just for fun, here is how to do it without map:
+        //return zip(self.weights[row], entries).reduce(0.0){$0 + ($1.0 * $1.1)}
     }
     
 }

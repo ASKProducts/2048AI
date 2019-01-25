@@ -10,12 +10,13 @@ import Foundation
 
 class Player {
     
+    
     func decide(game: Game) -> Move {
         print("ERROR")
         return Move.nothing
     }
     
-    func playGame(_ game: Game, printResult: Bool = false, printInterval: Int = 0) -> Double{
+    func playGame(_ game: Game, printResult: Bool = false, printInterval: Int = 0, moveLimit: Int? = nil) -> Double{
         game.turnNumber += 1
         
         let gameStartTime = DispatchTime.now()
@@ -24,6 +25,10 @@ class Player {
         if printInterval != 0 && game.turnNumber % printInterval == 0  { print(game) }
         
         while !game.isGameOver() {
+            
+            if let moveLimit = moveLimit{
+                if game.turnNumber > moveLimit { break }
+            }
             
             let start = DispatchTime.now()
             let move = decide(game: game)
@@ -38,7 +43,7 @@ class Player {
             _ = game.addNewRandomPiece()
             if printInterval != 0 && game.turnNumber % printInterval == 0 {
                 print(game)
-                print("Move took \(timeTaken) seconds. \nTotal Time elapsed: \(totalTimeElapsed) seconds. \nAverage \(totalTimeElapsed/Double(game.turnNumber)) seconds per turn.")
+                print("Move took \(timeTaken) seconds. \nTotal Time elapsed: \(totalTimeElapsed) seconds. \nAverage \(totalTimeElapsed/Double(game.turnNumber)) seconds per turn.\n")
             }
             
             game.turnNumber += 1
