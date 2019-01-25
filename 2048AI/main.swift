@@ -47,10 +47,6 @@ var results: [Double] = []
 
 for i in 0..<numberOfRuns {
     print("Running 2048AI. Run \(i+1)/\(numberOfRuns)")
-    print("Player:")
-    print("     DynamicDepthEMPlayer(chooser: {_ in (5, 5)}, useCache: true)")
-    print("Game:")
-    print("     FastGame(startingProbabilities: [2: 1.0], scoreFunc: fastBalanceScoreFunc)")
     
     
     //let cache = FileCache(cacheID: "moves100depth3", storageDepthCap: 3, pruneInterval: 1, writeToFile: false, writeInterval: 1)
@@ -68,7 +64,7 @@ for i in 0..<numberOfRuns {
     let fastGame = FastGame(startingProbabilities: [2: 1.0],
                             scoreFunc: FastWMScoreFunction(weights: newWeights, mergeFactor: 0.75))
     _ = player.playGame(fastGame, printResult: true, printInterval: 1, moveLimit: nil)
-    results.append(SquareScoreFunction().calculateScore(of: fastGame))
+    results.append(Double(fastGame.turnNumber))
     
     var highestTile = 0
     for r in 0..<4{
