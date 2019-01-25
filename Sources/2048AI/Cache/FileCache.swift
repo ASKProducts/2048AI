@@ -94,13 +94,13 @@ class FileCache: Cache {
         do {
             let currentDirectory = try FileManager.default.contentsOfDirectory(atPath: ".")
             if !currentDirectory.contains(filename){
-                FileManager.default.createFile(atPath: filename, contents: nil, attributes: nil)
+                _ = FileManager.default.createFile(atPath: filename, contents: nil, attributes: nil)
             }
             //force-unwrapping so that error comes as early as possible
             self.fileReader = StreamReader(url: URL(fileURLWithPath: filename))!
             
             if !currentDirectory.contains(tempfilename){
-                FileManager.default.createFile(atPath: tempfilename, contents: nil, attributes: nil)
+                _ = FileManager.default.createFile(atPath: tempfilename, contents: nil, attributes: nil)
             }
             try "".write(toFile: tempfilename, atomically: true, encoding: .utf8)
             self.tempfile = FileHandle(forWritingAtPath: tempfilename)!
