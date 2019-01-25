@@ -66,7 +66,7 @@ class FileCache: Cache {
     func getFileName(game: Game) -> String {
         var fileName = self.cacheID + "CACHE"
         fileName += game.getSignature()
-        fileName += game.scoreFunc.getSignature()
+        fileName += (game.scoreFunc as! Signable).getSignature()
         return fileName + ".cache"
     }
     
