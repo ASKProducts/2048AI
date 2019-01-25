@@ -66,7 +66,7 @@ for i in 0..<numberOfRuns {
                                   [4, 5, 6, 7],
                                   [5, 6, 7, 8]]
     let fastGame = FastGame(startingProbabilities: [2: 1.0],
-                            scoreFunc: FastWMScoreFunction(weights: newWeights, mergeFactor: 1))
+                            scoreFunc: FastWMScoreFunction(weights: newWeights, mergeFactor: 0.75))
     _ = player.playGame(fastGame, printResult: true, printInterval: 1, moveLimit: nil)
     results.append(SquareScoreFunction().calculateScore(of: fastGame))
     
@@ -79,9 +79,10 @@ for i in 0..<numberOfRuns {
     }
     print("Highest piece achieved: \(highestTile)\n\n")
 
-    
+    print("Results So Far: \(results)")
+    print("Average: \(results.reduce(0.0, +) / Double(results.count))")
 }
 
+print("Done.")
 
-print("Final Results: \(results)")
-print("Average: \(results.reduce(0.0, +) / Double(numberOfRuns))")
+
