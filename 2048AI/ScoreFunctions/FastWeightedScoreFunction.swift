@@ -12,15 +12,21 @@ import Foundation
 class FastWeightedScoreFunction: FastScoreFunction{
     
     let weights: [[Double]]
+    let squareEntries: Bool
     
-    init(weights: [[Double]]) {
+    init(weights: [[Double]], square: Bool = false) {
         self.weights = weights
+        self.squareEntries = square
         super.init()
     }
     
     override func rowScore(row: Int, entries: [Double]) -> Double {
         
-        return zip(self.weights[row], entries).map{$0.0 * $0.1}.reduce(0.0, +)
+        if squareEntries{
+            return zip(self.weights[row], entries).map{$0.0 * $0.1 * $0.1}.reduce(0.0, +)
+        }else{
+            return zip(self.weights[row], entries).map{$0.0 * $0.1}.reduce(0.0, +)
+        }
         
         //traditional way:
         /*

@@ -12,6 +12,8 @@
 		5720B43D21E2F51900BB770D /* BasicGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5720B43C21E2F51800BB770D /* BasicGame.swift */; };
 		5734F27021F27BCF00049505 /* CacheIDList.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5734F26F21F27BCF00049505 /* CacheIDList.txt */; };
 		5734F27221FA818100049505 /* FastScoreFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5734F27121FA818000049505 /* FastScoreFunction.swift */; };
+		5734F27621FAF96C00049505 /* FastWRCScoreFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5734F27521FAF96C00049505 /* FastWRCScoreFunction.swift */; };
+		5734F27821FB270B00049505 /* FastWMScoreFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5734F27721FB270B00049505 /* FastWMScoreFunction.swift */; };
 		5735596E21F076B20096AA80 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5735596D21F076B20096AA80 /* Cache.swift */; };
 		5735597021F078DF0096AA80 /* DictionaryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5735596F21F078DF0096AA80 /* DictionaryCache.swift */; };
 		573DBC8121DB8F62005E8F4C /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573DBC8021DB8F62005E8F4C /* Game.swift */; };
@@ -56,6 +58,8 @@
 		5720B43C21E2F51800BB770D /* BasicGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicGame.swift; sourceTree = "<group>"; };
 		5734F26F21F27BCF00049505 /* CacheIDList.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = CacheIDList.txt; sourceTree = "<group>"; };
 		5734F27121FA818000049505 /* FastScoreFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastScoreFunction.swift; sourceTree = "<group>"; };
+		5734F27521FAF96C00049505 /* FastWRCScoreFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastWRCScoreFunction.swift; sourceTree = "<group>"; };
+		5734F27721FB270B00049505 /* FastWMScoreFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastWMScoreFunction.swift; sourceTree = "<group>"; };
 		5735596D21F076B20096AA80 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		5735596F21F078DF0096AA80 /* DictionaryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryCache.swift; sourceTree = "<group>"; };
 		573DBC8021DB8F62005E8F4C /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 				57D637E521F015FA00348EFD /* WeightedScoreFunction.swift */,
 				5734F27121FA818000049505 /* FastScoreFunction.swift */,
 				57D637E721F0169800348EFD /* FastWeightedScoreFunction.swift */,
+				5734F27721FB270B00049505 /* FastWMScoreFunction.swift */,
+				5734F27521FAF96C00049505 /* FastWRCScoreFunction.swift */,
 				57D637E921F0183100348EFD /* FastPowerScoreFunction.swift */,
 			);
 			path = ScoreFunctions;
@@ -266,8 +272,10 @@
 				573DBC8321DB8FD4005E8F4C /* BalanceScoreFunction.swift in Sources */,
 				573DBC9921DD2BAA005E8F4C /* WashingMachinePlayer.swift in Sources */,
 				573DBC8E21DB90C3005E8F4C /* RandomPlayer.swift in Sources */,
+				5734F27621FAF96C00049505 /* FastWRCScoreFunction.swift in Sources */,
 				5720B43D21E2F51900BB770D /* BasicGame.swift in Sources */,
 				5735596E21F076B20096AA80 /* Cache.swift in Sources */,
+				5734F27821FB270B00049505 /* FastWMScoreFunction.swift in Sources */,
 				573DBC8A21DB906B005E8F4C /* SimplePlayer.swift in Sources */,
 				573DBC9721DCCDD2005E8F4C /* DynamicDepthEMPlayer.swift in Sources */,
 				57D637EA21F0183100348EFD /* FastPowerScoreFunction.swift in Sources */,

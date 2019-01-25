@@ -34,7 +34,7 @@ func chooser(game: Game) -> (Int, Int) {
 }
 
 
-let numberOfRuns = 1
+let numberOfRuns = 5
 /*
 let file = FileHandle(forWritingAtPath: "TMPCACHE(2_1.0_)(FastWeighted_-100.0_-50.0_-25.0_1.0_-50.0_-25.0_1.0_25.0_-25.0_1.0_35.0_50.0_1.0_25.0_50.0_100.0_).cache")
 
@@ -43,6 +43,7 @@ file?.write("poop".data(using: .utf8)!)
 
 exit(0)*/
 
+var results: [Double] = []
 
 for i in 0..<numberOfRuns {
     print("Running 2048AI. Run \(i+1)/\(numberOfRuns)")
@@ -60,9 +61,15 @@ for i in 0..<numberOfRuns {
                                [ -50, -25,   1,  30],
                                [ -25,   1,  40,  60],
                                [   1,  25,  50, 100]]
+    let newWeights: [[Double]] = [[2, 3, 4, 5],
+                                  [3, 4, 5, 6],
+                                  [4, 5, 6, 7],
+                                  [5, 6, 7, 8]]
     let fastGame = FastGame(startingProbabilities: [2: 1.0],
-                            scoreFunc: FastWeightedScoreFunction(weights: weights))
+                            scoreFunc: FastWMScoreFunction(weights: newWeights, mergeFactor: 1))
     _ = player.playGame(fastGame, printResult: true, printInterval: 1, moveLimit: nil)
+    results.append(SquareScoreFunction().calculateScore(of: fastGame))
+    
     var highestTile = 0
     for r in 0..<4{
         for c in 0..<4 {
@@ -75,3 +82,6 @@ for i in 0..<numberOfRuns {
     
 }
 
+
+print("Final Results: \(results)")
+print("Average: \(results.reduce(0.0, +) / Double(numberOfRuns))")

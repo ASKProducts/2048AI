@@ -19,7 +19,7 @@ class FastPowerScoreFunction: FastScoreFunction{
     }
     
     override func rowScore(row: Int, entries: [Double]) -> Double {
-        return entries.map{$0 * $0}.reduce(0.0, +) 
+        return entries.map{pow($0, exponent)}.reduce(0.0, +) 
     }
     
 }

@@ -65,5 +65,9 @@ class FastScoreFunction: ScoreFunction {
         score += colScoresTable[3][Int(game.getCol(3))]
         
         return score
+        
+
     }
 }
+
+
