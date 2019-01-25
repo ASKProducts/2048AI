@@ -8,6 +8,10 @@
 
 import Foundation
 
+
+testMergeFactors()
+exit(0)
+
 /*let expectimaxPlayer = ExpectimaxPlayer(maxDepth: 2, samplingAmount: 5)
 _ = expectimaxPlayer.playGame(numRows: 4, numCols: 4,
                               startingProbabiltiies: [2: 1],
@@ -56,7 +60,7 @@ for i in 0..<numberOfRuns {
                                   [4, 5, 6, 7],
                                   [5, 6, 7, 8]]
     let fastGame = FastGame(startingProbabilities: [2: 1],
-                            scoreFunc: FastWMScoreFunction(weights: weights, mergeFactor: 1.5))
+                            scoreFunc: FastWMScoreFunction(weights: newWeights, mergeFactor: 1.5))
     _ = player.playGame(fastGame, printResult: true, printInterval: 1, moveLimit: nil)
     results.append(Double(fastGame.turnNumber))
     

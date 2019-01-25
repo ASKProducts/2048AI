@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		5731EC9421FBC3F800EF075C /* MergeFactorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731EC9321FBC3F800EF075C /* MergeFactorTests.swift */; };
 		OBJ_53 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Cache.swift */; };
 		OBJ_54 /* DictionaryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* DictionaryCache.swift */; };
 		OBJ_55 /* FileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* FileCache.swift */; };
@@ -74,6 +75,7 @@
 /* Begin PBXFileReference section */
 		"2048AI::2048AI::Product" /* 2048AI */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2048AI; sourceTree = BUILT_PRODUCTS_DIR; };
 		"2048AI::2048AITests::Product" /* _048AITests.xctest */ = {isa = PBXFileReference; lastKnownFileType = file; name = _048AITests.xctest; path = 2048AITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5731EC9321FBC3F800EF075C /* MergeFactorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeFactorTests.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		OBJ_11 /* DictionaryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryCache.swift; sourceTree = "<group>"; };
 		OBJ_12 /* FileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCache.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_40 /* main.swift */,
+				5731EC9321FBC3F800EF075C /* MergeFactorTests.swift */,
 				OBJ_15 /* Games */,
 				OBJ_19 /* Players */,
 				OBJ_28 /* ScoreFunctions */,
@@ -327,6 +330,7 @@
 				OBJ_55 /* FileCache.swift in Sources */,
 				OBJ_56 /* Signatures.swift in Sources */,
 				OBJ_57 /* StreamReader.swift in Sources */,
+				5731EC9421FBC3F800EF075C /* MergeFactorTests.swift in Sources */,
 				OBJ_58 /* BasicGame.swift in Sources */,
 				OBJ_59 /* FastGame.swift in Sources */,
 				OBJ_60 /* Game.swift in Sources */,

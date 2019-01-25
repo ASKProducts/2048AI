@@ -17,11 +17,13 @@ class ExpectimaxPlayer: Player{
     var totalHits = 0
     
     var cache: Cache?
+    let printHitCount: Bool
     
-    init(maxDepth: Int, samplingAmount: Int, cache: Cache? = nil){
+    init(maxDepth: Int, samplingAmount: Int, cache: Cache? = nil, printHitCount: Bool = false){
         self.maxDepth = maxDepth
         self.samplingAmount = samplingAmount
         self.cache = cache
+        self.printHitCount = printHitCount
         super.init()
         
     }
@@ -30,7 +32,7 @@ class ExpectimaxPlayer: Player{
         cache?.updateCache(game: game)
         hits = 0
         let choice = pi(game: game, depth: 0)
-        if cache != nil {
+        if cache != nil && printHitCount {
             print("Hits: \(hits)")
             print("Average hits per turn: \(Double(totalHits)/Double(game.turnNumber))")
         }
