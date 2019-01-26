@@ -32,7 +32,8 @@ class FastScoreFunction: ScoreFunction {
                 var entries: [Double] = []
                 for i in 0..<4 {
                     let exp = (Int(row) >> (4*(3 - i))) & 0xF
-                    entries.append(Double(1 << exp))
+                    let entry = exp == 0 ? 0.0 : Double(1 << exp)
+                    entries.append(entry)
                 }
                 rowScoresTable[r][Int(row)] = rowScore(row: r, entries: entries)
                 colScoresTable[r][Int(row)] = colScore(col: r, entries: entries)

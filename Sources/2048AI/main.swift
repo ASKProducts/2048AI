@@ -9,7 +9,7 @@
 import Foundation
 
 
-testMergeFactors()
+testMergeFactors(parallel: false)
 exit(0)
 
 /*let expectimaxPlayer = ExpectimaxPlayer(maxDepth: 2, samplingAmount: 5)

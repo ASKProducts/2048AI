@@ -130,9 +130,9 @@
 		OBJ_15 /* Games */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_18 /* Game.swift */,
 				OBJ_16 /* BasicGame.swift */,
 				OBJ_17 /* FastGame.swift */,
-				OBJ_18 /* Game.swift */,
 			);
 			path = Games;
 			sourceTree = "<group>";
@@ -140,14 +140,14 @@
 		OBJ_19 /* Players */ = {
 			isa = PBXGroup;
 			children = (
-				OBJ_20 /* DynamicDepthEMPlayer.swift */,
-				OBJ_21 /* ExpectimaxPlayer.swift */,
-				OBJ_22 /* GreedyPlayer.swift */,
 				OBJ_23 /* Player.swift */,
-				OBJ_24 /* RandomPlayer.swift */,
-				OBJ_25 /* SimplePlayer.swift */,
 				OBJ_26 /* UserPlayer.swift */,
+				OBJ_25 /* SimplePlayer.swift */,
+				OBJ_22 /* GreedyPlayer.swift */,
+				OBJ_24 /* RandomPlayer.swift */,
 				OBJ_27 /* WashingMachinePlayer.swift */,
+				OBJ_21 /* ExpectimaxPlayer.swift */,
+				OBJ_20 /* DynamicDepthEMPlayer.swift */,
 			);
 			path = Players;
 			sourceTree = "<group>";
@@ -155,17 +155,17 @@
 		OBJ_28 /* ScoreFunctions */ = {
 			isa = PBXGroup;
 			children = (
+				OBJ_38 /* ScoreFunction.swift */,
 				OBJ_29 /* BalanceScoreFunction.swift */,
 				OBJ_30 /* BlankSpaceScoreFunction.swift */,
+				OBJ_37 /* PowerScoreFunctions.swift */,
 				OBJ_31 /* ClusterScoreFunction.swift */,
-				OBJ_32 /* FastPowerScoreFunction.swift */,
+				OBJ_39 /* WeightedScoreFunction.swift */,
 				OBJ_33 /* FastScoreFunction.swift */,
+				OBJ_32 /* FastPowerScoreFunction.swift */,
+				OBJ_36 /* FastWeightedScoreFunction.swift */,
 				OBJ_34 /* FastWMScoreFunction.swift */,
 				OBJ_35 /* FastWRCScoreFunction.swift */,
-				OBJ_36 /* FastWeightedScoreFunction.swift */,
-				OBJ_37 /* PowerScoreFunctions.swift */,
-				OBJ_38 /* ScoreFunction.swift */,
-				OBJ_39 /* WeightedScoreFunction.swift */,
 			);
 			path = ScoreFunctions;
 			sourceTree = "<group>";
