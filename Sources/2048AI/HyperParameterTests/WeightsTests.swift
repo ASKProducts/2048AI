@@ -13,7 +13,7 @@ func testWeights() {
     let gamesPerTrial = 10
     let randomRange = 0.0...10.0
     
-    var results: [[Double]: [Double]] = [:]
+    var results: [[Double]: [(Double, Double)]] = [:]
     
     let queue = DispatchQueue(label: "merge test queue", attributes: .concurrent)
     let group = DispatchGroup()
@@ -25,11 +25,11 @@ func testWeights() {
         
         var weights: [Double] = []
         for _ in 0..<4 {
-            weights.append(Double.random(in: randomRange))
+            let nextWeight = (weights.last ?? 0) + Double.random(in: randomRange)
+            weights.append(nextWeight)
         }
         
         print("Starting range #\(i) with weights \(weights)")
-        results[weights] = []
         
         for j in 1...gamesPerTrial {
             
@@ -45,11 +45,23 @@ func testWeights() {
                 _ = player.playGame(game, printResult: false, printInterval: 0)
                 
                 print("Ending Game \(j)/\(gamesPerTrial) of weights \(weights).")
-                let result = Double(game.turnNumber)*2.0
-                results[weights]?.append(result)
+                var boardSum = 0.0
+                var highestPiece = 0.0
+                for r in 0..<4 {
+                    for c in 0..<4{
+                        boardSum += Double(game.piece(r, c))
+                        highestPiece = max(highestPiece, Double(game.piece(r, c)))
+                    }
+                }
+                
+                if results[weights] == nil {
+                    results[weights] = []
+                }
+                
+                results[weights]?.append((boardSum, highestPiece))
                 print("Ending Game Board:")
                 print(game)
-                print("Board Sum: \(result)")
+                print("Board Sum: \(boardSum)")
                 print("Total Results:")
                 print(results)
                 
