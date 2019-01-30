@@ -75,6 +75,7 @@ func testWeights() {
     group.leave()
     group.notify(queue: queue){
         analyzeWeightsResults(results: results)
+        print("Done.")
         exit(EXIT_SUCCESS)
     }
     
