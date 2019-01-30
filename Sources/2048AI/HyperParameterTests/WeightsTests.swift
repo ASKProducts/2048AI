@@ -9,13 +9,13 @@ import Foundation
 
 func testWeights() {
     
-    let numberOfTrials = 100
+    let numberOfTrials = 1
     let gamesPerTrial = 10
-    let randomRange = 0.0...10.0
+    let randomRange = 1.0...1.0
     
     var results: [[Double]: [(Double, Double)]] = [:]
     
-    let queue = DispatchQueue(label: "merge test queue", attributes: .concurrent)
+    let queue = DispatchQueue(label: "weights test queue", attributes: .concurrent)
     let group = DispatchGroup()
     group.enter()
     
@@ -73,10 +73,12 @@ func testWeights() {
     }
     
     group.leave()
-    
     group.notify(queue: queue){
+        analyzeWeightsResults(results: results)
         exit(EXIT_SUCCESS)
     }
     
     dispatchMain()
 }
+
+

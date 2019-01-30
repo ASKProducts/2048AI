@@ -9,11 +9,6 @@
 import Foundation
 
 
-//testMergeFactors(parallel: false)
-//exit(0)
-
-testWeights()
-
 
 func chooser(game: Game) -> (Int, Int) {
     let numSpots = game.availableSpots.count
@@ -46,7 +41,7 @@ for i in 0..<numberOfRuns {
     
     //let cache = FileCache(cacheID: "moves100depth3", storageDepthCap: 3, pruneInterval: 1, writeToFile: false, writeInterval: 1)
     let cache = DictionaryCache()
-    let player = DynamicDepthEMPlayer(chooser: {_ in (2, 100)},
+    let player = DynamicDepthEMPlayer(chooser: chooser,
                                       cache: cache)
     let weights: [[Double]] = [[-100, -50, -25,   1],
                                [ -50, -25,   1,  30],
@@ -56,9 +51,13 @@ for i in 0..<numberOfRuns {
                                   [3, 4, 5, 6],
                                   [4, 5, 6, 7],
                                   [5, 6, 7, 8]]
+    let snakeWeights: [[Double]] = [[ 1,  2,  3,   4],
+                                    [ 8,  7,  6,   5],
+                                     [9, 10, 11,  12],
+                                    [16, 15, 14, 13]]
     let wrmWeights: [Double] = [1, 2, 4, 8]
     let fastGame = FastGame(startingProbabilities: [2: 1],
-                            scoreFunc: FastWRCScoreFunction(weights: wrmWeights, mergeFactor: 1.0))
+                            scoreFunc: FastWMScoreFunction(weights: snakeWeights, mergeFactor: 1.0))
     _ = player.playGame(fastGame, printResult: true, printInterval: 1, moveLimit: nil)
     results.append(Double(fastGame.turnNumber))
     
