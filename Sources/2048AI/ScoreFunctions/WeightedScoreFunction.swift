@@ -8,11 +8,13 @@
 
 import Foundation
 
+typealias ScoreWeights = [[Double]]
+
 class WeightedScoreFunction: ScoreFunction{
     
-    let weights: [[Double]]
+    let weights: ScoreWeights
     
-    init(weights: [[Double]]) {
+    init(weights: ScoreWeights) {
         self.weights = weights
     }
     

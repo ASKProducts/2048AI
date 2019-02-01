@@ -8,18 +8,16 @@
 import Foundation
 
 
-func testMergeFactors(parallel: Bool){
+func testMergeFactors(weights: ScoreWeights,
+                      mergeFactors: [Double],
+                      numberOfRuns: Int = 10,
+                      chooser: @escaping ParameterChoosingFunction = {_ in (2,16)},
+                      printInterval: Int = 0,
+                      parallel: Bool = false){
 
-    let weights: [[Double]] = [[2, 3, 4, 5],
-                               [3, 4, 5, 6],
-                               [4, 5, 6, 7],
-                               [5, 6, 7, 8]]
-    
-    let mergeFactors = (0...8).map{0.25 * Double($0)}
-    let numberOfRuns = 10
     var results: [Double: [Double]] = [:]
     let queue = DispatchQueue(label: "merge test queue",
-                                        attributes: parallel ? .concurrent : .init(rawValue: 0))
+                              attributes: parallel ? .concurrent : .init(rawValue: 0))
     let group = DispatchGroup()
     group.enter()
     
@@ -34,10 +32,11 @@ func testMergeFactors(parallel: Bool){
             
             run(in: queue, group: group){
                 let cache = DictionaryCache()
-                let player = ExpectimaxPlayer(maxDepth: 2, samplingAmount: 100, cache: cache)
+                let player = DynamicDepthEMPlayer(chooser: chooser, cache: cache)
                 let game = FastGame(startingProbabilities: [2: 1],
-                                    scoreFunc: FastWMScoreFunction(weights: weights, mergeFactor: mergeFactor))
-                _ = player.playGame(game, printResult: false, printInterval: 0)
+                                    scoreFunc: FastWeightedScoreFunction(weights: weights,
+                                                                         mergeFactor: mergeFactor))
+                _ = player.playGame(game, printResult: false, printInterval: printInterval)
                 
                 print("Ending Game \(i+1)/\(numberOfRuns) of merge factor \(mergeFactor).")
                 results[mergeFactor]?.append(Double(game.turnNumber))

@@ -8,10 +8,14 @@
 
 import Foundation
 
-testWeights()
-
-exit(0)
-
+testLightWeights(weightsArr: generateRandomLightWeights(amount: 4, range: 0.0...1.0, increasing: true),
+                 gamesPerTrial: 2,
+                 parallel: true,
+                 chooser: {_ in (2,16)},
+                 mergeFactor: 1.0,
+                 startingProbabilities: [2: 1.0],
+                 printInterval: 0,
+                 completion: {exit(0)})
 
 func chooser(game: Game) -> (Int, Int) {
     let numSpots = game.availableSpots.count
@@ -58,9 +62,10 @@ for i in 0..<numberOfRuns {
                                     [ 8,  7,  6,   5],
                                      [9, 10, 11,  12],
                                     [16, 15, 14, 13]]
-    let wrmWeights: [Double] = [0.1, 0.2, 0.3, 0.4]
+    let wrmWeights: [Double] = [0.7263248415724561, 1.4342987247484718, 1.7514102069565314, 2.344402748408044]
+    let scoreFunc = FastWeightedScoreFunction(lightWeights: wrmWeights, mergeFactor: 1.0)
     let fastGame = FastGame(startingProbabilities: [2: 1],
-                            scoreFunc: FastWRCScoreFunction(weights: wrmWeights, mergeFactor: 1.0))
+                            scoreFunc: scoreFunc)
     _ = player.playGame(fastGame, printResult: true, printInterval: 1, moveLimit: nil)
     results.append(Double(fastGame.turnNumber))
     

@@ -46,8 +46,6 @@
 		OBJ_71 /* ClusterScoreFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_31 /* ClusterScoreFunction.swift */; };
 		OBJ_72 /* FastPowerScoreFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_32 /* FastPowerScoreFunction.swift */; };
 		OBJ_73 /* FastScoreFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_33 /* FastScoreFunction.swift */; };
-		OBJ_74 /* FastWMScoreFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_34 /* FastWMScoreFunction.swift */; };
-		OBJ_75 /* FastWRCScoreFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_35 /* FastWRCScoreFunction.swift */; };
 		OBJ_76 /* FastWeightedScoreFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_36 /* FastWeightedScoreFunction.swift */; };
 		OBJ_77 /* PowerScoreFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_37 /* PowerScoreFunctions.swift */; };
 		OBJ_78 /* ScoreFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_38 /* ScoreFunction.swift */; };
@@ -103,8 +101,6 @@
 		OBJ_31 /* ClusterScoreFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterScoreFunction.swift; sourceTree = "<group>"; };
 		OBJ_32 /* FastPowerScoreFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastPowerScoreFunction.swift; sourceTree = "<group>"; };
 		OBJ_33 /* FastScoreFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastScoreFunction.swift; sourceTree = "<group>"; };
-		OBJ_34 /* FastWMScoreFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastWMScoreFunction.swift; sourceTree = "<group>"; };
-		OBJ_35 /* FastWRCScoreFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastWRCScoreFunction.swift; sourceTree = "<group>"; };
 		OBJ_36 /* FastWeightedScoreFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastWeightedScoreFunction.swift; sourceTree = "<group>"; };
 		OBJ_37 /* PowerScoreFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerScoreFunctions.swift; sourceTree = "<group>"; };
 		OBJ_38 /* ScoreFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreFunction.swift; sourceTree = "<group>"; };
@@ -181,8 +177,6 @@
 				OBJ_33 /* FastScoreFunction.swift */,
 				OBJ_32 /* FastPowerScoreFunction.swift */,
 				OBJ_36 /* FastWeightedScoreFunction.swift */,
-				OBJ_34 /* FastWMScoreFunction.swift */,
-				OBJ_35 /* FastWRCScoreFunction.swift */,
 			);
 			path = ScoreFunctions;
 			sourceTree = "<group>";
@@ -214,7 +208,7 @@
 			name = Products;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -222,7 +216,6 @@
 				OBJ_41 /* Tests */,
 				OBJ_45 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_7 /* Sources */ = {
@@ -324,7 +317,7 @@
 			knownRegions = (
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_45 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -366,8 +359,6 @@
 				OBJ_71 /* ClusterScoreFunction.swift in Sources */,
 				OBJ_72 /* FastPowerScoreFunction.swift in Sources */,
 				OBJ_73 /* FastScoreFunction.swift in Sources */,
-				OBJ_74 /* FastWMScoreFunction.swift in Sources */,
-				OBJ_75 /* FastWRCScoreFunction.swift in Sources */,
 				OBJ_76 /* FastWeightedScoreFunction.swift in Sources */,
 				OBJ_77 /* PowerScoreFunctions.swift in Sources */,
 				5731EC992200065500EF075C /* WeightsTests.swift in Sources */,
