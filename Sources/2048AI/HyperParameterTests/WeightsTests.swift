@@ -23,13 +23,14 @@ func generateRandomLightWeights(amount: Int, range: ClosedRange<Double>, increas
 
 //note: the user must manually call exit(0) within the completion closure
 func testLightWeights(weightsArr: [LightWeights],
-                 gamesPerTrial: Int = 10,
-                 parallel: Bool = false,
-                 chooser: @escaping ParameterChoosingFunction = {_ in (2, 16)},
-                 mergeFactor: Double = 1.0,
-                 startingProbabilities: [Int: Double] = [2: 1.0],
-                 printInterval: Int = 0,
-                 completion: @escaping () -> ()) {
+                      preprocessEntries: ((Double) -> (Double))? = nil,
+                      gamesPerTrial: Int = 10,
+                      parallel: Bool = false,
+                      chooser: @escaping ParameterChoosingFunction = {_ in (2, 16)},
+                      mergeFactor: Double = 1.0,
+                      startingProbabilities: [Int: Double] = [2: 1.0],
+                      printInterval: Int = 0,
+                      completion: @escaping () -> ()) {
     
     var results: [[Double]: [(Double, Double)]] = [:]
     
@@ -52,7 +53,9 @@ func testLightWeights(weightsArr: [LightWeights],
                 
                 let cache = DictionaryCache()
                 let player = DynamicDepthEMPlayer(chooser: chooser, cache: cache)
-                let scoreFunc = FastWeightedScoreFunction(lightWeights: weights, mergeFactor: mergeFactor)
+                let scoreFunc = FastWeightedScoreFunction(lightWeights: weights,
+                                                          mergeFactor: mergeFactor,
+                                                          preprocessEntries: preprocessEntries)
                 let game = FastGame(startingProbabilities: startingProbabilities, scoreFunc: scoreFunc)
                 
                 _ = player.playGame(game, printResult: false, printInterval: printInterval)
@@ -78,6 +81,8 @@ func testLightWeights(weightsArr: [LightWeights],
                 print("Total Results:")
                 print(results)
                 
+                analyzeWeightsResults(results: results)
+                
                 print("Total Time Elapsed: \(timeSince(start))")
             }
             
@@ -87,7 +92,6 @@ func testLightWeights(weightsArr: [LightWeights],
     
     group.leave()
     group.notify(queue: queue){
-        analyzeWeightsResults(results: results)
         print("Done.")
         completion()
     }

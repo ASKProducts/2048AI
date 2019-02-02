@@ -8,14 +8,17 @@
 
 import Foundation
 
-testLightWeights(weightsArr: generateRandomLightWeights(amount: 4, range: 0.0...1.0, increasing: true),
-                 gamesPerTrial: 2,
-                 parallel: true,
+testLightWeights(weightsArr: [[1.0, 2.0, 3.0, 4.0]],
+                 preprocessEntries: {$0*$0},
+                 gamesPerTrial: 3,
+                 parallel: false,
                  chooser: {_ in (2,16)},
                  mergeFactor: 1.0,
                  startingProbabilities: [2: 1.0],
-                 printInterval: 0,
+                 printInterval: 1,
                  completion: {exit(0)})
+
+
 
 func chooser(game: Game) -> (Int, Int) {
     let numSpots = game.availableSpots.count
