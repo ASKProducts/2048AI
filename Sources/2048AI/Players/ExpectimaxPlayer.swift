@@ -19,11 +19,15 @@ class ExpectimaxPlayer: Player{
     var cache: Cache?
     let printHitCount: Bool
     
-    init(maxDepth: Int, samplingAmount: Int, cache: Cache? = nil, printHitCount: Bool = false){
+    //if replicateStartingProbabilities is true, then the expectimax algorithm will search through all starting probabilities. If false, will only recurse into the most likely
+    let replicateStartingProbabilities: Bool
+    
+    init(maxDepth: Int, samplingAmount: Int, cache: Cache? = nil, printHitCount: Bool = false, replicateStartingProbabilities: Bool = true){
         self.maxDepth = maxDepth
         self.samplingAmount = samplingAmount
         self.cache = cache
         self.printHitCount = printHitCount
+        self.replicateStartingProbabilities = replicateStartingProbabilities
         super.init()
         
     }
@@ -110,8 +114,15 @@ class ExpectimaxPlayer: Player{
         
         var value = 0.0
         
+        let startingProbabilities: [Int: Double]
+        if replicateStartingProbabilities { startingProbabilities = game.startingProbabilities }
+        else{
+            let startingPiece = game.startingProbabilities.max{ $0.1 < $1.1 }!
+            startingProbabilities = [startingPiece.0: 1.0]
+        }
+        
         for spot in availableSpots {
-            for (piece, probability) in game.startingProbabilities {
+            for (piece, probability) in startingProbabilities {
                 let gameAfterAddingPiece = newGame.duplicate()
                 _ = gameAfterAddingPiece.addNewPiece(piece, at: spot)
                 value += score(game: gameAfterAddingPiece, depth: depth) * probability / Double(availableSpots.count)

@@ -8,18 +8,21 @@
 
 import Foundation
 
-testLightWeights(weightsArr: [[1.0, 2.0, 3.0, 4.0]],
-                 preprocessEntries: {$0*$0},
-                 gamesPerTrial: 3,
+
+
+testLightWeights(weightsArr: [[0.4734564083507181, 1.2951105326575059, 1.8412190231058896, 2.7855576423447417]],
+                 preprocessEntries: {$0},
+                 gamesPerTrial: 1,
                  parallel: false,
-                 chooser: {_ in (2,16)},
+                 chooser: {_ in (3, 5)},
                  mergeFactor: 1.0,
-                 startingProbabilities: [2: 1.0],
+                 startingProbabilities: [2: 0.9, 4: 0.1],
+                 replicateStartingProbabilities: false,
                  printInterval: 1,
                  completion: {exit(0)})
 
 
-
+/*
 func chooser(game: Game) -> (Int, Int) {
     let numSpots = game.availableSpots.count
     let samplingAmount = 10
@@ -88,3 +91,4 @@ for i in 0..<numberOfRuns {
 print("Done.")
 
 
+*/

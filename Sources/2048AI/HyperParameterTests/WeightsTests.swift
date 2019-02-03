@@ -29,6 +29,7 @@ func testLightWeights(weightsArr: [LightWeights],
                       chooser: @escaping ParameterChoosingFunction = {_ in (2, 16)},
                       mergeFactor: Double = 1.0,
                       startingProbabilities: [Int: Double] = [2: 1.0],
+                      replicateStartingProbabilities: Bool = true,
                       printInterval: Int = 0,
                       completion: @escaping () -> ()) {
     
@@ -52,7 +53,9 @@ func testLightWeights(weightsArr: [LightWeights],
                 print("Starting game \(j) in range #\(i+1) with weights \(weights)")
                 
                 let cache = DictionaryCache()
-                let player = DynamicDepthEMPlayer(chooser: chooser, cache: cache)
+                let player = DynamicDepthEMPlayer(chooser: chooser,
+                                                  cache: cache,
+                                                  replicateStartingProbabilities: replicateStartingProbabilities)
                 let scoreFunc = FastWeightedScoreFunction(lightWeights: weights,
                                                           mergeFactor: mergeFactor,
                                                           preprocessEntries: preprocessEntries)
