@@ -35,8 +35,7 @@ func testLightWeights(weightsArr: [LightWeights],
     
     var results: [[Double]: [(Double, Double)]] = [:]
     
-    let attributes: DispatchQueue.Attributes = parallel ? .concurrent : .init(rawValue: 0)
-    let queue = DispatchQueue(label: "weights test queue", attributes: attributes)
+    let queue: DispatchQueue? = parallel ? DispatchQueue(label: "weights test queue", attributes: .concurrent) : nil
     let group = DispatchGroup()
     group.enter()
     
@@ -94,7 +93,14 @@ func testLightWeights(weightsArr: [LightWeights],
     }
     
     group.leave()
-    group.notify(queue: queue){
+    
+    if parallel{
+        group.notify(queue: queue!){
+            print("Done.")
+            completion()
+        }
+    }
+    else{
         print("Done.")
         completion()
     }

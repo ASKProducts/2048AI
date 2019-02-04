@@ -9,23 +9,14 @@
 import Foundation
 
 
+let bestWeights = [0.4734564083507181, 1.2951105326575059, 1.8412190231058896, 2.7855576423447417]
 
-testLightWeights(weightsArr: [[0.4734564083507181, 1.2951105326575059, 1.8412190231058896, 2.7855576423447417]],
-                 preprocessEntries: {$0},
-                 gamesPerTrial: 1,
-                 parallel: false,
-                 chooser: {_ in (3, 5)},
-                 mergeFactor: 1.0,
-                 startingProbabilities: [2: 0.9, 4: 0.1],
-                 replicateStartingProbabilities: false,
-                 printInterval: 1,
-                 completion: {exit(0)})
+var weights = generateRandomLightWeights(amount: 30, range: 0.0...1.0, increasing: true)
+weights.append([1,2,3,4])
 
-
-/*
 func chooser(game: Game) -> (Int, Int) {
     let numSpots = game.availableSpots.count
-    let samplingAmount = 10
+    let samplingAmount = 5
     var maxDepth = 0
     
     switch numSpots {
@@ -42,6 +33,22 @@ func chooser(game: Game) -> (Int, Int) {
     return (maxDepth, samplingAmount)
 }
 
+
+testLightWeights(weightsArr: [[0.9013187132485968, 1.7512704126065217, 2.0458227484269136, 2.958109094842132]],
+                 preprocessEntries: {$0},
+                 gamesPerTrial: 10,
+                 parallel: false,
+                 chooser: chooser,
+                 mergeFactor: 1.0,
+                 startingProbabilities: [2: 1],
+                 replicateStartingProbabilities: true,
+                 printInterval: 1,
+                 completion: {exit(0)})
+
+
+
+
+/*
 
 let numberOfRuns = 5
 

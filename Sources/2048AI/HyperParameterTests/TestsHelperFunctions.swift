@@ -11,9 +11,15 @@ func ave(arr: [Double]) -> Double{
     return arr.reduce(0.0, +) / Double(arr.count)
 }
 
-func run(in queue: DispatchQueue, group: DispatchGroup, f: @escaping () -> ()) {
+func run(in queue: DispatchQueue?, group: DispatchGroup, f: @escaping () -> ()) {
     group.enter()
-    queue.async {
+    if let queue = queue{
+        queue.async {
+            f()
+            group.leave()
+        }
+    }
+    else{
         f()
         group.leave()
     }
