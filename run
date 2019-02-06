@@ -1,0 +1,19 @@
+#!/bin/sh
+
+#  run.sh
+#  2048AI
+#
+#  Created by Aaron Kaufer on 2/5/19.
+#
+
+if [ $# -gt 0 ]; then
+    cat Sources/2048AI/main.swift > "logs/$1_main.swift"
+    echo "logs/$1.log" > logname
+    echo "" > "logs/$1.log"
+    unbuffer swift run >> "logs/$1.log" &
+    if [ "$2" = "-w" ]; then
+        tail -f "logs/$1.log"
+    fi
+else
+    swift run
+fi

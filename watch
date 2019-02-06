@@ -1,0 +1,9 @@
+#!/bin/sh
+
+#  watch.sh
+#  2048AI
+#
+#  Created by Aaron Kaufer on 2/5/19.
+#  
+
+tail -f "$(cat logname)"
