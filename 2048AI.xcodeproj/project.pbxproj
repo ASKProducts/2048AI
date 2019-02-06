@@ -80,6 +80,7 @@
 		5731EC96220001B600EF075C /* TestsHelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsHelperFunctions.swift; sourceTree = "<group>"; };
 		5731EC982200065500EF075C /* WeightsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightsTests.swift; sourceTree = "<group>"; };
 		5731EC9A22011D9B00EF075C /* WeightsResultsAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightsResultsAnalyzer.swift; sourceTree = "<group>"; };
+		57373C44220A8B4E00E58269 /* run.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = run.sh; sourceTree = "<group>"; };
 		OBJ_10 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		OBJ_11 /* DictionaryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryCache.swift; sourceTree = "<group>"; };
 		OBJ_12 /* FileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCache.swift; sourceTree = "<group>"; };
@@ -212,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
+				57373C44220A8B4E00E58269 /* run.sh */,
 				OBJ_7 /* Sources */,
 				OBJ_41 /* Tests */,
 				OBJ_45 /* Products */,

@@ -23,7 +23,7 @@ func chooser(game: Game) -> (Int, Int) {
     case 0...4:
         maxDepth = 4
     case 5...10:
-        maxDepth = 3
+        maxDepth = 2
     case 11...16:
         maxDepth = 2
     default:
@@ -33,8 +33,8 @@ func chooser(game: Game) -> (Int, Int) {
     return (maxDepth, samplingAmount)
 }
 
-
-testLightWeights(weightsArr: [[0.9013187132485968, 1.7512704126065217, 2.0458227484269136, 2.958109094842132]],
+/*
+testLightWeights(weightsArr: [[0.7837296541192433, 1.7716042130053955, 2.278206884723587, 3.1554465426145732]],
                  preprocessEntries: {$0},
                  gamesPerTrial: 10,
                  parallel: false,
@@ -44,8 +44,17 @@ testLightWeights(weightsArr: [[0.9013187132485968, 1.7512704126065217, 2.0458227
                  replicateStartingProbabilities: true,
                  printInterval: 1,
                  completion: {exit(0)})
+*/
 
-
+testLightWeights(weightsArr: [[1, 2, 3, -5],
+                              [0.4734564083507181, 1.2951105326575059, 1.8412190231058896, 2.7855576423447417],
+                              [1, 2, 3, 4]],
+                 gamesPerTrial: 1,
+                 chooser: {_ in (2,16)},
+                 mergeFactor: 1.0,
+                 startingProbabilities: [2: 1],
+                 printInterval: 1,
+                 completion: {exit(0)})
 
 
 /*
