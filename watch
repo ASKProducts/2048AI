@@ -6,4 +6,5 @@
 #  Created by Aaron Kaufer on 2/5/19.
 #  
 
-tail -f "$(cat logname)"
+DIR=$(dirname $(readlink -f $0))
+tail -f "$(cat $DIR/logname)"

@@ -7,8 +7,9 @@
 #
 
 if [ $# -gt 0 ]; then
+    DIR=$(dirname $(readlink -f $0))
     cat Sources/2048AI/main.swift > "logs/$1_main.swift"
-    echo "logs/$1.log" > logname
+    echo "$DIR/logs/$1.log" > logname
     echo "" > "logs/$1.log"
     unbuffer swift run >> "logs/$1.log" &
     if [ "$2" = "-w" ]; then
