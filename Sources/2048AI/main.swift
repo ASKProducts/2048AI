@@ -41,7 +41,7 @@ let tester = ScoreFunctionTester(scoreFunctions: sfs,
                                  replicateStartingProbabilties: true,
                                  printInterval: 1)
 
-tester.runTests{_ in
+tester.runTests{
     exit(0)
 }
 

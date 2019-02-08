@@ -35,6 +35,8 @@ class ScoreFunctionTester{
     
     var printInterval: Int
     
+    var overallResults: [[TesterResult]] = []
+    
     init(scoreFunctions: [ScoreFunction],
          chooser: @escaping ParameterChoosingFunction,
          gamesPerTrial: Int = 1,
@@ -52,8 +54,7 @@ class ScoreFunctionTester{
         self.printInterval = printInterval
     }
     
-    func runTests(completion: ([[TesterResult]]) -> ()){
-        var overallResults: [[TesterResult]] = []
+    func runTests(completion: @escaping () -> ()){
         
         let queue: DispatchQueue? = parallel ? DispatchQueue(label: "score function test queue", attributes: .concurrent) : nil
         let group = DispatchGroup()
@@ -117,16 +118,31 @@ class ScoreFunctionTester{
                     
                     print("Result: \(result)")
                     
-                    overallResults[i].append(result)
-                    print("Results So Far: \(overallResults)")
+                    self.overallResults[i].append(result)
+                    print("Results So Far: \(self.overallResults)")
                     
-                    self.analyzeResults(overallResults)
+                    self.analyzeResults(self.overallResults)
                     
                 }
                 
             }
             
         }
+        
+        group.leave()
+        
+        if parallel{
+            group.notify(queue: queue!){
+                print("Done.")
+                completion()
+            }
+        }
+        else{
+            print("Done.")
+            completion()
+        }
+        
+        dispatchMain()
     }
     
     func analyzeResults(_ results: [[TesterResult]]){
@@ -137,6 +153,6 @@ class ScoreFunctionTester{
             return (arr[0].scoreFunction, gm)
             }.sorted { $0.1 < $1.1 }
         
-        print(sortedResults)
+        sortedResults.forEach{ print($0) }
     }
 }
