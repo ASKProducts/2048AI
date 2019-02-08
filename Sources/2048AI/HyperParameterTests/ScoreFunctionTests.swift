@@ -93,7 +93,8 @@ class ScoreFunctionTester{
                     let hours = Int(floor(duration/3600.0))
                     let minutes = Int(floor(duration/60)) % 60
                     let seconds = floor((duration - floor(duration/60))*100)/100.0
-                    print("Game Lasted \(duration) Seconds. (\(hours):\(minutes):\(seconds))")
+                    let durationString = String(format: "%02d:%02d:%04.1f", hours, minutes, seconds)
+                    print("Game Lasted \(duration) Seconds. (\(durationString))")
                     
                     print("Total Time Elapsed: \(timeSince(start))")
                     
