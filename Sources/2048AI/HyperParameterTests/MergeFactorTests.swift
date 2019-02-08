@@ -42,7 +42,7 @@ func testMergeFactors(weights: ScoreWeights,
                 results[mergeFactor]?.append(Double(game.turnNumber))
                 print("Results for current merge factor:")
                 print(results[mergeFactor]!)
-                print("Average so far: \(ave(arr: results[mergeFactor]!))")
+                print("Average so far: \(ave(results[mergeFactor]!))")
                 
                 print("Total Results:")
                 print(results)
@@ -64,7 +64,7 @@ func testMergeFactors(weights: ScoreWeights,
         print(results)
         
         print("Averages:")
-        let averageDictionary = results.mapValues { ave(arr: $0) }
+        let averageDictionary = results.mapValues { ave( $0) }
         print(averageDictionary)
         
         let timeTaken = timeSince(start)

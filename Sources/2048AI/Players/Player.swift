@@ -16,7 +16,7 @@ class Player {
         return Move.nothing
     }
     
-    func playGame(_ game: Game, printResult: Bool = false, printInterval: Int = 0, moveLimit: Int? = nil) -> Double{
+    func playGame(_ game: Game, printResult: Bool = false, printInterval: Int = 0, moveLimit: Int? = nil){
         game.turnNumber += 1
         
         let gameStartTime = DispatchTime.now()
@@ -49,13 +49,10 @@ class Player {
             game.turnNumber += 1
         }
         
-        let finalScore = game.score
         if printResult{
             print("Final Result:")
             print(game)
         }
-        
-        return finalScore
     }
     
 /* old version of the function. keeping around just in case:

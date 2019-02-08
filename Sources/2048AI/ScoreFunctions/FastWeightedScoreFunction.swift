@@ -27,6 +27,10 @@ class FastWeightedScoreFunction: FastScoreFunction{
     let weights: ScoreWeights
     let mergeFactor: Double
     
+    var isLightWeights: Bool
+    
+    var additionalDescription: String?
+    
     //this is for if the user wants to square the entries or log them etc. It is only called on the nonzero entries of the board (to allow for log)
     let preprocessEntries: ((Double) -> (Double))?
     
@@ -34,6 +38,7 @@ class FastWeightedScoreFunction: FastScoreFunction{
         self.weights = weights
         self.preprocessEntries = preprocessEntries
         self.mergeFactor = mergeFactor
+        self.isLightWeights = false
         super.init()
     }
     
@@ -41,6 +46,23 @@ class FastWeightedScoreFunction: FastScoreFunction{
         self.init(weights: convertLightWeights(lightWeights),
                   mergeFactor: mergeFactor,
                   preprocessEntries: preprocessEntries)
+        self.isLightWeights = true
+    }
+    
+    override var description: String {
+        var str = "{Fast Weighted; "
+        if self.isLightWeights{
+            str += "Light Weights \(self.weights[0].map{ $0 - self.weights[0][0]/2.0 }), "
+        }
+        else{
+            str += "Weights \(self.weights), "
+        }
+        str += "Merge Factor \(self.mergeFactor)"
+        if let additionalDescription = self.additionalDescription {
+            str += " " + additionalDescription
+        }
+        
+        return str + "}"
     }
     
     

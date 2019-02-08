@@ -22,4 +22,8 @@ class FastPowerScoreFunction: FastScoreFunction{
         return entries.map{pow($0, exponent)}.reduce(0.0, +) 
     }
     
+    override var description: String {
+        return "{Fast Power; Exponent \(self.exponent)}"
+    }
+    
 }

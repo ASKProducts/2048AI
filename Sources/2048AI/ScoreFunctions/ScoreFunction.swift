@@ -8,11 +8,13 @@
 
 import Foundation
 
-class ScoreFunction{
+class ScoreFunction: CustomStringConvertible{
     
     func calculateScore(of game: Game) -> Double {
         fatalError("calculateScore(of:) must be overridden")
     }
     
-    
+    var description: String {
+        fatalError("description must be overridden")
+    }
 }

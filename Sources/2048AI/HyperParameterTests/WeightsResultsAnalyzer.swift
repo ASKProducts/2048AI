@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+
 extension String {
     func convertToDoubleArray() -> [Double]? {
         if let data = self.data(using: .utf8) {
@@ -50,15 +52,17 @@ func analyzeWeightResultsFromStdin() {
 }
 
 
+/*** DEPRECATED IN FAVOR OF ScoreFunctionTests ***/
+
 func analyzeWeightsResults(results: [[Double]: [(Double, Double)]] ){
     print("\(results.count) entries.")
     
     print("2^(Average log of board sum):")
-    let mapped = results.mapValues{$0.map{log2($0.0)}}.mapValues{ave(arr: $0)}.map{$0}.sorted{$0.1 < $1.1}
+    let mapped = results.mapValues{$0.map{log2($0.0)}}.mapValues{ave($0)}.map{$0}.sorted{$0.1 < $1.1}
     mapped.forEach{print("\($0.0): \(pow(2,$0.1))")}
     
     print("2^(Average log of highest piece):")
-    let mapped2 = results.mapValues{$0.map{log2($0.1)}}.mapValues{ave(arr: $0)}.map{$0}.sorted{$0.1 < $1.1}
+    let mapped2 = results.mapValues{$0.map{log2($0.1)}}.mapValues{ave($0)}.map{$0}.sorted{$0.1 < $1.1}
     mapped2.forEach{print("\($0.0): \(pow(2,$0.1))")}
     
 }

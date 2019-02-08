@@ -21,6 +21,10 @@ class SquareScoreFunction: ScoreFunction{
         return score
     }
     
+    override var description: String {
+        return "Square Score Function"
+    }
+    
 }
 
 class PowerScoreFunction: ScoreFunction {
@@ -40,6 +44,10 @@ class PowerScoreFunction: ScoreFunction {
         }
         
         return score
+    }
+    
+    override var description: String {
+        return "{Classical Power; Exponent \(self.exponent)}"
     }
     
 }

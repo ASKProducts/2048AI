@@ -25,6 +25,8 @@
 		5731EC97220001B600EF075C /* TestsHelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731EC96220001B600EF075C /* TestsHelperFunctions.swift */; };
 		5731EC992200065500EF075C /* WeightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731EC982200065500EF075C /* WeightsTests.swift */; };
 		5731EC9B22011D9B00EF075C /* WeightsResultsAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731EC9A22011D9B00EF075C /* WeightsResultsAnalyzer.swift */; };
+		57321755220D38A100BA61E1 /* ScoreFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57321754220D38A100BA61E1 /* ScoreFunctionTests.swift */; };
+		57373C47220D04B500E58269 /* NneonneoScoreFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57373C46220D04B500E58269 /* NneonneoScoreFunction.swift */; };
 		OBJ_53 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Cache.swift */; };
 		OBJ_54 /* DictionaryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* DictionaryCache.swift */; };
 		OBJ_55 /* FileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_12 /* FileCache.swift */; };
@@ -80,8 +82,10 @@
 		5731EC96220001B600EF075C /* TestsHelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsHelperFunctions.swift; sourceTree = "<group>"; };
 		5731EC982200065500EF075C /* WeightsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightsTests.swift; sourceTree = "<group>"; };
 		5731EC9A22011D9B00EF075C /* WeightsResultsAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightsResultsAnalyzer.swift; sourceTree = "<group>"; };
+		57321754220D38A100BA61E1 /* ScoreFunctionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreFunctionTests.swift; sourceTree = "<group>"; };
 		57373C44220A8B4E00E58269 /* run */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = run; sourceTree = "<group>"; };
 		57373C45220A96A100E58269 /* watch */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = watch; sourceTree = "<group>"; };
+		57373C46220D04B500E58269 /* NneonneoScoreFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NneonneoScoreFunction.swift; sourceTree = "<group>"; };
 		OBJ_10 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		OBJ_11 /* DictionaryCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryCache.swift; sourceTree = "<group>"; };
 		OBJ_12 /* FileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileCache.swift; sourceTree = "<group>"; };
@@ -138,6 +142,7 @@
 				5731EC9321FBC3F800EF075C /* MergeFactorTests.swift */,
 				5731EC982200065500EF075C /* WeightsTests.swift */,
 				5731EC9A22011D9B00EF075C /* WeightsResultsAnalyzer.swift */,
+				57321754220D38A100BA61E1 /* ScoreFunctionTests.swift */,
 			);
 			path = HyperParameterTests;
 			sourceTree = "<group>";
@@ -179,6 +184,7 @@
 				OBJ_33 /* FastScoreFunction.swift */,
 				OBJ_32 /* FastPowerScoreFunction.swift */,
 				OBJ_36 /* FastWeightedScoreFunction.swift */,
+				57373C46220D04B500E58269 /* NneonneoScoreFunction.swift */,
 			);
 			path = ScoreFunctions;
 			sourceTree = "<group>";
@@ -347,12 +353,14 @@
 				5731EC97220001B600EF075C /* TestsHelperFunctions.swift in Sources */,
 				5731EC9421FBC3F800EF075C /* MergeFactorTests.swift in Sources */,
 				OBJ_58 /* BasicGame.swift in Sources */,
+				57321755220D38A100BA61E1 /* ScoreFunctionTests.swift in Sources */,
 				OBJ_59 /* FastGame.swift in Sources */,
 				OBJ_60 /* Game.swift in Sources */,
 				5731EC9B22011D9B00EF075C /* WeightsResultsAnalyzer.swift in Sources */,
 				OBJ_61 /* DynamicDepthEMPlayer.swift in Sources */,
 				OBJ_62 /* ExpectimaxPlayer.swift in Sources */,
 				OBJ_63 /* GreedyPlayer.swift in Sources */,
+				57373C47220D04B500E58269 /* NneonneoScoreFunction.swift in Sources */,
 				OBJ_64 /* Player.swift in Sources */,
 				OBJ_65 /* RandomPlayer.swift in Sources */,
 				OBJ_66 /* SimplePlayer.swift in Sources */,

@@ -12,4 +12,8 @@ class BlankSpaceScoreFunction: ScoreFunction{
     override func calculateScore(of game: Game) -> Double {
         return Double(game.availableSpots.count)
     }
+    
+    override var description: String {
+        return "{Blank Space}"
+    }
 }

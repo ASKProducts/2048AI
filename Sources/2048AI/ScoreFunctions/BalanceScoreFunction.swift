@@ -27,6 +27,10 @@ class BalanceScoreFunction: ScoreFunction {
         return score
     }
     
+    override var description: String {
+        return "{Classical Balance}"
+    }
+    
 }
 
 

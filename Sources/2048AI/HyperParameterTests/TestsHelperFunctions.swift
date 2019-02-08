@@ -7,7 +7,7 @@
 
 import Foundation
 
-func ave(arr: [Double]) -> Double{
+func ave(_ arr: [Double]) -> Double{
     return arr.reduce(0.0, +) / Double(arr.count)
 }
 

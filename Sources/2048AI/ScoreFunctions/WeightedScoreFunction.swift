@@ -28,4 +28,8 @@ class WeightedScoreFunction: ScoreFunction{
         return score
     }
     
+    override var description: String {
+        return "{Classical Weighted Score Function; Weights: \(self.weights)}"
+    }
+    
 }

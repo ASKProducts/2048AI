@@ -67,7 +67,10 @@ class ExpectimaxPlayer: Player{
         hits += 1
         totalHits += 1
         
-        if depth == maxDepth || game.isGameOver(){
+        if game.isGameOver(){
+            return 0
+        }
+        if depth == maxDepth{
             return game.score
         }
         if let scoreCache = cache {
@@ -132,14 +135,13 @@ class ExpectimaxPlayer: Player{
         return value
     }
     
-    override func playGame(_ game: Game, printResult: Bool, printInterval: Int, moveLimit: Int? = nil) -> Double {
+    override func playGame(_ game: Game, printResult: Bool, printInterval: Int, moveLimit: Int? = nil) {
         cache?.initialize(player: self, game: game)
         
-        let res = super.playGame(game, printResult: printResult, printInterval: printInterval, moveLimit: moveLimit)
+        super.playGame(game, printResult: printResult, printInterval: printInterval, moveLimit: moveLimit)
         
         cache?.endGame()
         
-        return res
     }
     
 }

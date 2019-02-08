@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 func generateRandomLightWeights(amount: Int, range: ClosedRange<Double>, increasing: Bool = false) -> [LightWeights]{
     var weightsArr: [LightWeights] = []
     for _ in 0..<amount {
@@ -20,6 +21,8 @@ func generateRandomLightWeights(amount: Int, range: ClosedRange<Double>, increas
     }
     return weightsArr
 }
+
+/*** DEPRECATED IN FAVOR OF ScoreFunctionTests ***/
 
 //note: the user must manually call exit(0) within the completion closure
 func testLightWeights(weightsArr: [LightWeights],
@@ -60,7 +63,7 @@ func testLightWeights(weightsArr: [LightWeights],
                                                           preprocessEntries: preprocessEntries)
                 let game = FastGame(startingProbabilities: startingProbabilities, scoreFunc: scoreFunc)
                 
-                _ = player.playGame(game, printResult: false, printInterval: printInterval)
+                player.playGame(game, printResult: false, printInterval: printInterval)
                 
                 print("Ending Game \(j)/\(gamesPerTrial) of weights \(weights).")
                 var boardSum = 0.0

@@ -8,6 +8,7 @@
 
 import Foundation
 
+//the idea of this score function is that it rewards boards where the largest pieces are clustered together. It was my dad's idea; it doesn't work very well...
 class ClusterScoreFunction: ScoreFunction {
     
     override func calculateScore(of game: Game) -> Double {
@@ -31,6 +32,10 @@ class ClusterScoreFunction: ScoreFunction {
             }
         }
         return score
+    }
+    
+    override var description: String {
+        return "{Cluster}"
     }
     
 }
