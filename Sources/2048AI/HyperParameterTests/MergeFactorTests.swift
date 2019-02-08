@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+/*** DEPRECATED IN FAVOR OF ScoreFunctionTests ***/
 func testMergeFactors(weights: ScoreWeights,
                       mergeFactors: [Double],
                       numberOfRuns: Int = 10,
@@ -42,7 +42,7 @@ func testMergeFactors(weights: ScoreWeights,
                 results[mergeFactor]?.append(Double(game.turnNumber))
                 print("Results for current merge factor:")
                 print(results[mergeFactor]!)
-                print("Average so far: \(ave(results[mergeFactor]!))")
+                print("Average so far: \(arithmeticMean(results[mergeFactor]!))")
                 
                 print("Total Results:")
                 print(results)
@@ -64,7 +64,7 @@ func testMergeFactors(weights: ScoreWeights,
         print(results)
         
         print("Averages:")
-        let averageDictionary = results.mapValues { ave( $0) }
+        let averageDictionary = results.mapValues { arithmeticMean( $0) }
         print(averageDictionary)
         
         let timeTaken = timeSince(start)

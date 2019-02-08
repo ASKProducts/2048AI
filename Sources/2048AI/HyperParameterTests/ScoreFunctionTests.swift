@@ -92,7 +92,7 @@ class ScoreFunctionTester{
                     print(game)
                     let hours = Int(floor(duration/3600.0))
                     let minutes = Int(floor(duration/60)) % 60
-                    let seconds = remainder(duration, 60.0)
+                    let seconds = floor((duration - floor(duration/60))*100)/100.0
                     print("Game Lasted \(duration) Seconds. (\(hours):\(minutes):\(seconds))")
                     
                     print("Total Time Elapsed: \(timeSince(start))")
@@ -149,7 +149,7 @@ class ScoreFunctionTester{
         print("Sorted by geometric mean of highest piece:")
         
         let sortedResults = results.map{ arr -> (ScoreFunction, Double) in
-            let gm: Double = pow(2.0, ave( arr.map{ log2(Double($0.highestPieceAchieved)) }))
+            let gm: Double = geometricMean(arr.map{ Double($0.highestPieceAchieved) })
             return (arr[0].scoreFunction, gm)
             }.sorted { $0.1 < $1.1 }
         

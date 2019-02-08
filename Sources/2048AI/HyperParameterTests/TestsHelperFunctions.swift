@@ -7,8 +7,12 @@
 
 import Foundation
 
-func ave(_ arr: [Double]) -> Double{
+func arithmeticMean(_ arr: [Double]) -> Double{
     return arr.reduce(0.0, +) / Double(arr.count)
+}
+
+func geometricMean(_ arr: [Double]) -> Double {
+    return exp(arithmeticMean(arr.map{log($0)}))
 }
 
 func run(in queue: DispatchQueue?, group: DispatchGroup, f: @escaping () -> ()) {
