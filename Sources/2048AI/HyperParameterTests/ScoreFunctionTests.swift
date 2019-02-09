@@ -92,7 +92,7 @@ class ScoreFunctionTester{
                     print(game)
                     let hours = Int(floor(duration/3600.0))
                     let minutes = Int(floor(duration/60)) % 60
-                    let seconds = floor((duration - floor(duration/60))*100)/100.0
+                    let seconds = floor((duration - floor(duration/60)*60)*100)/100.0
                     let durationString = String(format: "%02d:%02d:%04.1f", hours, minutes, seconds)
                     print("Game Lasted \(duration) Seconds. (\(durationString))")
                     
@@ -109,9 +109,9 @@ class ScoreFunctionTester{
                         }
                     }
                     
-                    let result = TesterResult(scoreFunctionIndex: i,
+                    let result = TesterResult(scoreFunctionIndex: i+1,
                                               scoreFunction: scoreFunction,
-                                              trialNumber: j,
+                                              trialNumber: j+1,
                                               highestPieceAchieved: highestPiece,
                                               finalScore: game.score,
                                               finalTurnNumber: game.turnNumber,

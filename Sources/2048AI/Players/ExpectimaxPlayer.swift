@@ -67,10 +67,7 @@ class ExpectimaxPlayer: Player{
         hits += 1
         totalHits += 1
         
-        if game.isGameOver(){
-            return 0
-        }
-        if depth == maxDepth{
+        if depth == maxDepth || game.isGameOver(){
             return game.score
         }
         if let scoreCache = cache {
