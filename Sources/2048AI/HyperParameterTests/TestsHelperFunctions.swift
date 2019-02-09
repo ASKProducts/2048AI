@@ -12,7 +12,7 @@ func arithmeticMean(_ arr: [Double]) -> Double{
 }
 
 func geometricMean(_ arr: [Double]) -> Double {
-    return exp(arithmeticMean(arr.map{log($0)}))
+    return pow(arithmeticMean(arr.map{log2($0)}), 2)
 }
 
 func run(in queue: DispatchQueue?, group: DispatchGroup, f: @escaping () -> ()) {

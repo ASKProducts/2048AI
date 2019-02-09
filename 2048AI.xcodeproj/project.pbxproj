@@ -26,6 +26,8 @@
 		5731EC992200065500EF075C /* WeightsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731EC982200065500EF075C /* WeightsTests.swift */; };
 		5731EC9B22011D9B00EF075C /* WeightsResultsAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731EC9A22011D9B00EF075C /* WeightsResultsAnalyzer.swift */; };
 		57321755220D38A100BA61E1 /* ScoreFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57321754220D38A100BA61E1 /* ScoreFunctionTests.swift */; };
+		57321757220E34FE00BA61E1 /* CompoundScoreFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57321756220E34FE00BA61E1 /* CompoundScoreFunction.swift */; };
+		57321759220E7C9800BA61E1 /* SmoothWeightedScoreFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57321758220E7C9800BA61E1 /* SmoothWeightedScoreFunction.swift */; };
 		57373C47220D04B500E58269 /* NneonneoScoreFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57373C46220D04B500E58269 /* NneonneoScoreFunction.swift */; };
 		OBJ_53 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_10 /* Cache.swift */; };
 		OBJ_54 /* DictionaryCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = OBJ_11 /* DictionaryCache.swift */; };
@@ -83,6 +85,8 @@
 		5731EC982200065500EF075C /* WeightsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightsTests.swift; sourceTree = "<group>"; };
 		5731EC9A22011D9B00EF075C /* WeightsResultsAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightsResultsAnalyzer.swift; sourceTree = "<group>"; };
 		57321754220D38A100BA61E1 /* ScoreFunctionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreFunctionTests.swift; sourceTree = "<group>"; };
+		57321756220E34FE00BA61E1 /* CompoundScoreFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompoundScoreFunction.swift; sourceTree = "<group>"; };
+		57321758220E7C9800BA61E1 /* SmoothWeightedScoreFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmoothWeightedScoreFunction.swift; sourceTree = "<group>"; };
 		57373C44220A8B4E00E58269 /* run */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = run; sourceTree = "<group>"; };
 		57373C45220A96A100E58269 /* watch */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = watch; sourceTree = "<group>"; };
 		57373C46220D04B500E58269 /* NneonneoScoreFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NneonneoScoreFunction.swift; sourceTree = "<group>"; };
@@ -185,6 +189,8 @@
 				OBJ_32 /* FastPowerScoreFunction.swift */,
 				OBJ_36 /* FastWeightedScoreFunction.swift */,
 				57373C46220D04B500E58269 /* NneonneoScoreFunction.swift */,
+				57321756220E34FE00BA61E1 /* CompoundScoreFunction.swift */,
+				57321758220E7C9800BA61E1 /* SmoothWeightedScoreFunction.swift */,
 			);
 			path = ScoreFunctions;
 			sourceTree = "<group>";
@@ -355,6 +361,7 @@
 				OBJ_58 /* BasicGame.swift in Sources */,
 				57321755220D38A100BA61E1 /* ScoreFunctionTests.swift in Sources */,
 				OBJ_59 /* FastGame.swift in Sources */,
+				57321757220E34FE00BA61E1 /* CompoundScoreFunction.swift in Sources */,
 				OBJ_60 /* Game.swift in Sources */,
 				5731EC9B22011D9B00EF075C /* WeightsResultsAnalyzer.swift in Sources */,
 				OBJ_61 /* DynamicDepthEMPlayer.swift in Sources */,
@@ -365,6 +372,7 @@
 				OBJ_65 /* RandomPlayer.swift in Sources */,
 				OBJ_66 /* SimplePlayer.swift in Sources */,
 				OBJ_67 /* UserPlayer.swift in Sources */,
+				57321759220E7C9800BA61E1 /* SmoothWeightedScoreFunction.swift in Sources */,
 				OBJ_68 /* WashingMachinePlayer.swift in Sources */,
 				OBJ_69 /* BalanceScoreFunction.swift in Sources */,
 				OBJ_70 /* BlankSpaceScoreFunction.swift in Sources */,
