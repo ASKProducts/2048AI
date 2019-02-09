@@ -31,7 +31,7 @@ func chooser(game: Game) -> (Int, Int) {
 
 let sf = SmoothWeightedScoreFunction(lightWeights: [1, 2, 3, 4], smoothFactor: 100, emptyScore: 10)
 
-let params = (1...50).map{_ in (Double.random(in: 0...100), Double.random(in: 0...100))}
+let params = (1...5).map{_ in (Double.random(in: 0...100), Double.random(in: 0...100))}
 let sfs = params.map{ SmoothWeightedScoreFunction(lightWeights: [1, 2, 3, 4], smoothFactor: $0.0, emptyScore: $0.1) }
 
 let tester = ScoreFunctionTester(scoreFunctions: sfs,

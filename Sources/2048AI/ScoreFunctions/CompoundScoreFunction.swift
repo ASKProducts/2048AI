@@ -58,7 +58,7 @@ class CompoundScoreFunction : FastScoreFunction {
     override var description: String {
         var str = "{Compound; "
         if self.isLightWeights{
-            str += "Light Weights \(self.weights[0].map{ $0 - self.weights[0][0]/2.0 }), "
+            str += "Light Weights \(self.weights[0].map{ $0 - self.weights[0][0]/2.0 })"
         }
         else{
             str += "Weights \(self.weights)"

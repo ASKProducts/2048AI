@@ -64,7 +64,7 @@ class ScoreFunctionTester{
         
         for (i, scoreFunction) in scoreFunctions.enumerated() {
             
-            print("Starting Score Function \(i)/\(scoreFunctions.count):")
+            print("Starting Score Function \(i+1)/\(scoreFunctions.count):")
             print(scoreFunction)
             
             overallResults.append([])
@@ -149,11 +149,11 @@ class ScoreFunctionTester{
     func analyzeResults(_ results: [[TesterResult]]){
         print("Sorted by geometric mean of highest piece:")
         
-        let sortedResults = results.map{ arr -> (ScoreFunction, Double) in
+        let sortedResults = results.compactMap{ arr -> (ScoreFunction, Double)? in
+            guard arr.count != 0 else{ return nil }
             let gm: Double = geometricMean(arr.map{ Double($0.highestPieceAchieved) })
             return (arr[0].scoreFunction, gm)
             }.sorted { $0.1 < $1.1 }
-        
         sortedResults.forEach{ print($0) }
     }
 }
