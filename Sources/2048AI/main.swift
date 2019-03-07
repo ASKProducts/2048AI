@@ -9,6 +9,19 @@
 import Foundation
 
 
+let agent = OnlineAgent()
+agent.playGame()
+
+dispatchMain()
+
+
+//DispatchQueue.main.asyncAfter(deadline: .now() + 60){
+//    exit(0)
+//}
+
+//dispatchMain()
+
+/*
 func chooser(game: Game) -> (Int, Int) {
     let numSpots = game.availableSpots.count
     let samplingAmount = 5
@@ -29,13 +42,13 @@ func chooser(game: Game) -> (Int, Int) {
 }
 
 
-let sf = SmoothWeightedScoreFunction(lightWeights: [1, 2, 3, 4], smoothFactor: 10, emptyScore: 20, smoothZeroes: false)
+let sf = SmoothWeightedScoreFunction(lightWeights: [1, 2, 3, 400], smoothFactor: 1000, emptyScore: 2000, smoothZeroes: false)
 
 //let params = (1...5).map{_ in (Double.random(in: 0...100), Double.random(in: 0...100))}
 //let sfs = params.map{ SmoothWeightedScoreFunction(lightWeights: [1, 2, 3, 4], smoothFactor: $0.0, emptyScore: $0.1) }
 
 let tester = ScoreFunctionTester(scoreFunctions: [sf],
-                                 chooser: {_ in (3,5)},
+                                 chooser: {_ in ( 2,16)},
                                  gamesPerTrial: 10,
                                  parallel: false,
                                  startingProbabilities: [2: 1.0],
@@ -111,3 +124,5 @@ print("Done.")
 
 
 */
+
+ */

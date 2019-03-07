@@ -157,21 +157,25 @@ class Game: CustomStringConvertible {
         fatalError("Subclass must override addNewPiece(:at:)")
     }
     
-    func addNewRandomPiece() -> Bool {
-        if availableSpots.count == 0 { return false }
+    //returns the new piece and where it was added, if it was added, and nil otherwise
+    func addNewRandomPiece() -> (Int, Spot)? {
+        if availableSpots.count == 0 { return nil }
         
         let r = Int.random(in: 0..<availableSpots.count)
         let spot = availableSpots[r]
         if startingProbabilities.count > 1{
-            _ = addNewPiece(randomlySample(probabilities: startingProbabilities), at: spot)
+            let piece = randomlySample(probabilities: startingProbabilities)
+            _ = addNewPiece(piece, at: spot)
+            return (piece, spot)
         }
         else{
             guard startingProbabilities.count == 1 else {
                 fatalError("startingProbabilities is empty")
             }
-            _ = addNewPiece(startingProbabilities.first!.key, at: spot)
+            let piece = startingProbabilities.first!.key
+            _ = addNewPiece(piece, at: spot)
+            return (piece, spot)
         }
-        return true
     }
     
     //returns whether or not the move was made. must update availableSpots.

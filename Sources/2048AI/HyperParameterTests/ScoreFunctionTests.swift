@@ -36,7 +36,7 @@ class ScoreFunctionTester{
     var printInterval: Int
     
     var overallResults: [[TesterResult]] = []
-    
+
     init(scoreFunctions: [ScoreFunction],
          chooser: @escaping ParameterChoosingFunction,
          gamesPerTrial: Int = 1,
