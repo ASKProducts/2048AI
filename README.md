@@ -1,3 +1,3 @@
 # 2048AI
 
-A description of this package.
+A customizable artificial intelligence agent for the popular game 2048.
