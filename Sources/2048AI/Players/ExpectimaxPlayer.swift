@@ -19,15 +19,21 @@ class ExpectimaxPlayer: Player{
     var cache: Cache?
     let printHitCount: Bool
     
+    let parallel: Bool
+    
+    let parallelizeFirstMoves = true
+    let parallelizeFirstSpots = false
+    
     //if replicateStartingProbabilities is true, then the expectimax algorithm will search through all starting probabilities. If false, will only recurse into the most likely
     let replicateStartingProbabilities: Bool
     
-    init(maxDepth: Int, samplingAmount: Int, cache: Cache? = nil, printHitCount: Bool = false, replicateStartingProbabilities: Bool = true){
+    init(maxDepth: Int, samplingAmount: Int, cache: Cache? = nil, printHitCount: Bool = false, replicateStartingProbabilities: Bool = true, parallel: Bool = false){
         self.maxDepth = maxDepth
         self.samplingAmount = samplingAmount
         self.cache = cache
         self.printHitCount = printHitCount
         self.replicateStartingProbabilities = replicateStartingProbabilities
+        self.parallel = parallel
         super.init()
         
     }
@@ -50,13 +56,44 @@ class ExpectimaxPlayer: Player{
         var bestMove = Move.nothing
         var bestScore: Double? = nil
         
-        for move in moves{
-            if !game.canMove(move) { continue }
+        if parallel && parallelizeFirstMoves  {
+            //do things in parallel
+            let waitSem = DispatchSemaphore(value: 0)
             
-            let score = V(game: game, move: move, depth: depth)
-            if bestScore == nil || score > bestScore! {
-                bestScore = score
-                bestMove = move
+            let queue: DispatchQueue = DispatchQueue(label: "expectimax test queue", attributes: .concurrent)
+            let group = DispatchGroup()
+            group.enter()
+            
+            for move in moves{
+                run(in: queue, group: group) {
+                    if !game.canMove(move) { return }
+                    
+                    let score = self.V(game: game, move: move, depth: depth)
+                    if bestScore == nil || score > bestScore! {
+                        bestScore = score
+                        bestMove = move
+                    }
+                }
+            }
+            
+            group.leave()
+            //0.89 at the end of turn 30 vs 1.46
+            group.notify(queue: queue) {
+                waitSem.signal()
+            }
+            
+            waitSem.wait()
+        }
+        else{
+            
+            for move in moves{
+                if !game.canMove(move) { continue }
+                
+                let score = V(game: game, move: move, depth: depth)
+                if bestScore == nil || score > bestScore! {
+                    bestScore = score
+                    bestMove = move
+                }
             }
         }
         
@@ -87,6 +124,7 @@ class ExpectimaxPlayer: Player{
                 bestScore = score
             }
         }
+
         
         guard let score = bestScore else{
             fatalError("bestScore is nil after trasversing all moves")
@@ -121,13 +159,44 @@ class ExpectimaxPlayer: Player{
             startingProbabilities = [startingPiece.0: 1.0]
         }
         
-        for spot in availableSpots {
-            for (piece, probability) in startingProbabilities {
-                let gameAfterAddingPiece = newGame.duplicate()
-                _ = gameAfterAddingPiece.addNewPiece(piece, at: spot)
-                value += score(game: gameAfterAddingPiece, depth: depth) * probability / Double(availableSpots.count)
+        if parallel && depth == 0 && parallelizeFirstSpots {
+            let queue: DispatchQueue = DispatchQueue(label: "expectimax test queue", attributes: .concurrent)
+            let group = DispatchGroup()
+            group.enter()
+            
+            let waitSem = DispatchSemaphore(value: 0)
+            
+            for spot in availableSpots {
+                for (piece, probability) in startingProbabilities {
+                    run(in: queue, group: group) {
+                        let gameAfterAddingPiece = newGame.duplicate()
+                        _ = gameAfterAddingPiece.addNewPiece(piece, at: spot)
+                        value += self.score(game: gameAfterAddingPiece, depth: depth) * probability / Double(availableSpots.count)
+                    }
+                }
+            }
+            
+            group.leave()
+            //23.91 at the end of turn 10
+            group.notify(queue: queue) {
+                waitSem.signal()
+            }
+            
+            waitSem.wait()
+        }
+        else{
+            
+            for spot in availableSpots {
+                for (piece, probability) in startingProbabilities {
+                    let gameAfterAddingPiece = newGame.duplicate()
+                    _ = gameAfterAddingPiece.addNewPiece(piece, at: spot)
+                    value += score(game: gameAfterAddingPiece, depth: depth) * probability / Double(availableSpots.count)
+                }
             }
         }
+        
+        
+        
         
         return value
     }

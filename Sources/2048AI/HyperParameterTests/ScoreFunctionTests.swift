@@ -28,7 +28,9 @@ class ScoreFunctionTester{
     var chooser: ParameterChoosingFunction
     
     var gamesPerTrial: Int
-    var parallel: Bool
+    var testInParallel: Bool
+    
+    var useParallelInGames: Bool
     
     var startingProbabilities: [Int: Double]
     var replicateStartingProbabilties: Bool
@@ -40,7 +42,8 @@ class ScoreFunctionTester{
     init(scoreFunctions: [ScoreFunction],
          chooser: @escaping ParameterChoosingFunction,
          gamesPerTrial: Int = 1,
-         parallel: Bool = false,
+         testInParallel: Bool = false,
+         useParallelInGames: Bool = false,
          startingProbabilities: [Int: Double] = [2: 1.0],
          replicateStartingProbabilties: Bool = true,
          printInterval: Int = 1) {
@@ -48,15 +51,16 @@ class ScoreFunctionTester{
         self.scoreFunctions = scoreFunctions
         self.chooser = chooser
         self.gamesPerTrial = gamesPerTrial
-        self.parallel = parallel
+        self.testInParallel = testInParallel
         self.startingProbabilities = startingProbabilities
         self.replicateStartingProbabilties = replicateStartingProbabilties
         self.printInterval = printInterval
+        self.useParallelInGames = useParallelInGames
     }
     
     func runTests(completion: @escaping () -> ()){
         
-        let queue: DispatchQueue? = parallel ? DispatchQueue(label: "score function test queue", attributes: .concurrent) : nil
+        let queue: DispatchQueue? = testInParallel ? DispatchQueue(label: "score function test queue", attributes: .concurrent) : nil
         let group = DispatchGroup()
         group.enter()
         
@@ -79,7 +83,8 @@ class ScoreFunctionTester{
                     let player = DynamicDepthEMPlayer(chooser: self.chooser,
                                                       cache: cache,
                                                       printHitCount: false,
-                                                      replicateStartingProbabilities: self.replicateStartingProbabilties)
+                                                      replicateStartingProbabilities: self.replicateStartingProbabilties,
+                                                      parallel: self.useParallelInGames)
                     
                     let game = FastGame(startingProbabilities: self.startingProbabilities, scoreFunc: scoreFunction)
                     
@@ -132,7 +137,7 @@ class ScoreFunctionTester{
         
         group.leave()
         
-        if parallel{
+        if testInParallel{
             group.notify(queue: queue!){
                 print("Done.")
                 completion()
