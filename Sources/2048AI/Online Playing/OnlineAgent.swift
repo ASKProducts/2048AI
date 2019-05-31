@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SocketIO
 
 /* Format for specifying input:
  -------------------
@@ -24,8 +23,6 @@ import SocketIO
  */
 
 class OnlineAgent {
-    let manager: SocketManager? = nil
-    let socket: SocketIOClient? = nil
     
     var emptyScore: Double? = nil
     var smoothFactor: Double? = nil
@@ -41,7 +38,7 @@ class OnlineAgent {
         
         readSettings()
     }
-    
+   /* 
     func connectToSocket(completion: @escaping () -> ()){
         socket?.on(clientEvent: .connect){data, ack in
             print("POOP!")
@@ -49,7 +46,7 @@ class OnlineAgent {
         }
         socket?.connect()
     }
-    
+   */ 
     func simpleSettings(){
         
         weights = [[1, 1,1,1], [2,2,2,2], [3,3,3,3], [4,4,4,4]]

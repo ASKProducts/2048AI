@@ -1,8 +1,21 @@
-const app = require('http').createServer((req, res) => {
-	res.writeHead(500)
-	res.end("failed")
+/*const app = require('http').createServer((req, res) => {
+    require("fs").createReadStream(require("path").join(__dirname, "../2048/index.html")).pipe(res);
 });
-const server = app.listen(8080);
+*/
+
+var express = require('express');
+var app = express();
+app.use(express.static(__dirname + '../2048'))
+
+app.get("/", (req, res) => {
+  res.sendFile(require("path").join(__dirname, "index.html"));
+});
+
+app.use('/2048', express.static('../2048'))
+
+
+const server = app.listen(80);
+
 const io = require('socket.io')(server);
 
 const sockets = {};
@@ -18,10 +31,14 @@ io.on('connection', (socket) => {
 	});
 
     socket.on('play', (settings) => {
+        console.log('starting new game with settings:' + settings)
         const { spawn } = require('child_process');
-        const game = spawn('unbuffer', ['-p', '../2048AI/.build/x86_64-apple-macosx10.10/debug/2048AI']);
+        const p = require("path").join(__dirname, ".build/x86_64-unknown-linux/debug/2048AI")
+        const game = spawn('unbuffer', ['-p', p]);
         //const game = spawn('../2048AI/.build/x86_64-apple-macosx10.10/debug/2048AI');
         //const settings = spawn('cat', ['../2048AI/settings']);
+
+        //console.log(game)
 
         s = JSON.parse(settings)
 
@@ -40,6 +57,7 @@ io.on('connection', (socket) => {
         game.stdin.write(s.samplingAmount[0]+ "\n")
 
 
+        console.log('wrote settings to game')
         /*settings.stdout.on('data', (data) => {
             game.stdin.write(data)
         });*/
