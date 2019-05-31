@@ -108,7 +108,7 @@ class OnlineAgent {
                                       cache: cache,
                                       replicateStartingProbabilities: true,
                                       parallel: false)
-        let scoreFunction = SmoothWeightedScoreFunction(precompute:true,
+        let scoreFunction = SmoothWeightedScoreFunction(precompute: true,
                                                         weights: weights!,
                                                         smoothFactor: smoothFactor!,
                                                         emptyScore: emptyScore!,

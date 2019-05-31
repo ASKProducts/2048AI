@@ -17,7 +17,8 @@ let weights: ScoreWeights = [[-1, -1, -1, -1],
                              [-1, -1, -1, -1],
                              [-1, -1,  -1,  1],
                              [-1,  -1,  1,  2], ]
-let sf = SmoothWeightedScoreFunction(weights: weights,
+let sf = SmoothWeightedScoreFunction(precompute: true,
+                                     weights: weights,
                                      smoothFactor: 200,
                                      emptyScore: 1000,
                                      smoothZeroes: false)
@@ -42,10 +43,10 @@ func chooser(game: Game) -> (Int, Int) {
 }
 
 ScoreFunctionTester(scoreFunctions: [sf],
-                    chooser: chooser,
+                    chooser: {_ in (2,5)},
                     gamesPerTrial: 5,
                     testInParallel: false,
-                    useParallelInGames: true, //0.234 at 100
+                    useParallelInGames: false, //0.234 at 100
                     startingProbabilities: [2: 1, 4:0],
                     replicateStartingProbabilties: false,
                     printInterval: 1).runTests {
