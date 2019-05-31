@@ -18,10 +18,17 @@ class FastScoreFunction: ScoreFunction {
     var rowScoresTable: [[Double]] = []
     var colScoresTable: [[Double]] = []
     
+    let precompute: Bool
+    var donePrecomputing: Bool = false
+    
     init(precompute: Bool = true) {
+        self.precompute = precompute
         super.init()
         if precompute{
-            precomputeTables()
+            DispatchQueue.global().async {
+                self.precomputeTables()
+                self.donePrecomputing = true
+            }
         }
     }
     
@@ -53,7 +60,10 @@ class FastScoreFunction: ScoreFunction {
     
     override func calculateScore(of game: Game) -> Double {
         var score = 0.0
-        if let game = game as? FastGame{
+        if precompute && donePrecomputing{
+            guard let game = game as? FastGame else {
+                fatalError("Attempting to use precomputed tables on a non-FastGame")
+            }
             for i in 0..<4{
                 score += rowScoresTable[i][Int(game.getRow(i))]
                 score += colScoresTable[i][Int(game.getCol(i))]
