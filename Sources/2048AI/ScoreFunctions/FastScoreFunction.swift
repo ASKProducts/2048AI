@@ -54,15 +54,15 @@ class FastScoreFunction: ScoreFunction {
     override func calculateScore(of game: Game) -> Double {
         var score = 0.0
         if let game = game as? FastGame{
-            for i in 0..<3{
+            for i in 0..<4{
                 score += rowScoresTable[i][Int(game.getRow(i))]
                 score += colScoresTable[i][Int(game.getCol(i))]
             }
         }
         else{
-            for i in 0..<3{
-                score += rowScore(row: i, entries: (0..<3).map{Double(game.piece(i, $0))})
-                score += colScore(col: i, entries: (0..<3).map{Double(game.piece($0, i))})
+            for i in 0..<4{
+                score += rowScore(row: i, entries: (0..<4).map{Double(game.piece(i, $0))})
+                score += colScore(col: i, entries: (0..<4).map{Double(game.piece($0, i))})
             }
         }
         
