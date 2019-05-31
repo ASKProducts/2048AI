@@ -29,7 +29,8 @@ class CompoundScoreFunction : FastScoreFunction {
     
     var isLightWeights = false
     
-    init(preprocessEntries: @escaping (BoardEntry) -> (Double) = {$0.val},
+    init(precompute: Bool = true,
+         preprocessEntries: @escaping (BoardEntry) -> (Double) = {$0.val},
          weights: ScoreWeights = CompoundScoreFunction.defaultWeights,
          individualScore: @escaping (BoardEntry) -> (Double) = {_ in 0},
          pairScore: @escaping (BoardEntry, BoardEntry) -> (Double) = {_,_ in 0},
@@ -40,9 +41,11 @@ class CompoundScoreFunction : FastScoreFunction {
         self.pairScore = pairScore
         self.additionalDescription = additionalDescription
         self.isLightWeights = false
+        super.init(precompute: precompute)
     }
     
-    init(preprocessEntries: @escaping (BoardEntry) -> (Double) = {$0.val},
+    init(precompute: Bool = true,
+         preprocessEntries: @escaping (BoardEntry) -> (Double) = {$0.val},
          lightWeights: LightWeights,
          individualScore: @escaping (BoardEntry) -> (Double) = {_ in 0},
          pairScore: @escaping (BoardEntry, BoardEntry) -> (Double) = {_,_ in 0},
@@ -53,6 +56,7 @@ class CompoundScoreFunction : FastScoreFunction {
         self.pairScore = pairScore
         self.additionalDescription = additionalDescription
         self.isLightWeights = true
+        super.init(precompute: precompute)
     }
     
     override var description: String {
