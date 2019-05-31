@@ -103,7 +103,8 @@ class OnlineAgent {
         let player = ExpectimaxPlayer(maxDepth: depth!,
                                       samplingAmount: samplingAmount!,
                                       cache: cache,
-                                      replicateStartingProbabilities: true)
+                                      replicateStartingProbabilities: true,
+                                      parallel: false)
         let scoreFunction = SmoothWeightedScoreFunction(weights: weights!,
                                                         smoothFactor: smoothFactor!,
                                                         emptyScore: emptyScore!,
@@ -123,7 +124,7 @@ class OnlineAgent {
                 break
             }
             game.turnNumber += 1
-            var board: [[Int]] = (0..<4).map{r in (0..<4).map{c in game.piece(r, c)}}
+            let board: [[Int]] = (0..<4).map{r in (0..<4).map{c in game.piece(r, c)}}
             print("{\"type\": \"state\", \"board\": \"\(board)\"}")
         }
     }

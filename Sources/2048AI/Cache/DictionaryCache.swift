@@ -19,6 +19,7 @@ class DictionaryCache: Cache {
     
     var cache: [DictionaryCacheEntry: Double] = [:]
     var player: ExpectimaxPlayer? = nil
+    let semaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
     
     
     func initialize(player: ExpectimaxPlayer, game: Game) {
@@ -26,14 +27,21 @@ class DictionaryCache: Cache {
     }
     
     func getScore(game: Game, depthRemaining: Int) -> Double? {
-        return cache[DictionaryCacheEntry(game: game, depthRemaining: depthRemaining)]
+        semaphore.wait()
+        let res = cache[DictionaryCacheEntry(game: game, depthRemaining: depthRemaining)]
+        semaphore.signal()
+        return res
     }
     
     func storeResult(game: Game, depthRemaining: Int, score: Double) {
+        semaphore.wait()
         cache[DictionaryCacheEntry(game: game, depthRemaining: depthRemaining)] = score
+        semaphore.signal()
     }
     
     func updateCache(game: Game) {
+        
+        semaphore.wait()
         var toRemoveKeys: [DictionaryCacheEntry] = []
         guard let player = self.player else {
             fatalError("player was never initialized")
@@ -47,6 +55,8 @@ class DictionaryCache: Cache {
         for key in toRemoveKeys {
             cache.removeValue(forKey: key)
         }
+        
+        semaphore.signal()
     }
     
     func endGame() {

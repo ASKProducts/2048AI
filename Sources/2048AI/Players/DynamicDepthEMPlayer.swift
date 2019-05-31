@@ -14,9 +14,9 @@ class DynamicDepthEMPlayer : ExpectimaxPlayer {
     
     let chooser: ParameterChoosingFunction
     
-    init(chooser: @escaping ParameterChoosingFunction, cache: Cache? = nil, printHitCount: Bool = false, replicateStartingProbabilities: Bool = true){
+    init(chooser: @escaping ParameterChoosingFunction, cache: Cache? = nil, printHitCount: Bool = false, replicateStartingProbabilities: Bool = true, parallel: Bool = false){
         self.chooser = chooser
-        super.init(maxDepth: 1, samplingAmount: 1, cache: cache, printHitCount: printHitCount, replicateStartingProbabilities: replicateStartingProbabilities)
+        super.init(maxDepth: 1, samplingAmount: 1, cache: cache, printHitCount: printHitCount, replicateStartingProbabilities: replicateStartingProbabilities, parallel: parallel)
     }
     
     override func decide(game: Game) -> Move {

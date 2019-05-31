@@ -20,8 +20,8 @@ class SmoothWeightedScoreFunction: CompoundScoreFunction {
         super.init(preprocessEntries: {$0.val},
                    lightWeights: lightWeights,
                    individualScore: {$0.val == 0 ? emptyScore : 0},
-                   pairScore:
-            {smoothZeroes || ($0.val != 0 && $1.val != 0) ? smoothFactor*logDist(a: $0.val, b: $1.val) : 0},
+                   pairScore:{SmoothWeightedScoreFunction.pairScore(piece1: $0.val, piece2: $1.val,
+                                                                    smoothFactor: smoothFactor, smoothZeroes: smoothZeroes)},
                    additionalDescription: "Smooth Factor \(smoothFactor), Empty Score \(emptyScore)")
     }
     
@@ -30,10 +30,19 @@ class SmoothWeightedScoreFunction: CompoundScoreFunction {
         super.init(preprocessEntries: {$0.val},
                    weights: weights,
                    individualScore: {$0.val == 0 ? emptyScore : 0},
-                   pairScore:
-            {smoothZeroes || ($0.val != 0 && $1.val != 0) ? smoothFactor*logDist(a: $0.val, b: $1.val) : 0},
+                   pairScore: {SmoothWeightedScoreFunction.pairScore(piece1: $0.val, piece2: $1.val,
+                                                                     smoothFactor: smoothFactor, smoothZeroes: smoothZeroes)},
                    additionalDescription: "Smooth Factor \(smoothFactor), Empty Score \(emptyScore)")
     }
+    
+    static func pairScore(piece1: Double, piece2: Double, smoothFactor: Double, smoothZeroes: Bool) -> Double{
+        if smoothZeroes || (piece1 != 0 && piece2 != 0) {
+            //let smallestExp = [piece1, piece2].map{log2($0 + 1)}.min()!
+            return smoothFactor * logDist(a: piece1, b: piece2)
+        }
+        return 0
+    }
+    
     
     override var description: String {
         if smoothZeroes{
