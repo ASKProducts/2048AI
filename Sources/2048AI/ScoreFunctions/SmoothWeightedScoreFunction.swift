@@ -15,9 +15,10 @@ class SmoothWeightedScoreFunction: CompoundScoreFunction {
     
     let smoothZeroes: Bool
     
-    init(lightWeights: LightWeights, smoothFactor: Double, emptyScore: Double, smoothZeroes: Bool = false) {
+    init(precompute: Bool = true, lightWeights: LightWeights, smoothFactor: Double, emptyScore: Double, smoothZeroes: Bool = false) {
         self.smoothZeroes = smoothZeroes
-        super.init(preprocessEntries: {$0.val},
+        super.init(precompute: precompute,
+                   preprocessEntries: {$0.val},
                    lightWeights: lightWeights,
                    individualScore: {$0.val == 0 ? emptyScore : 0},
                    pairScore:{SmoothWeightedScoreFunction.pairScore(piece1: $0.val, piece2: $1.val,
@@ -25,9 +26,10 @@ class SmoothWeightedScoreFunction: CompoundScoreFunction {
                    additionalDescription: "Smooth Factor \(smoothFactor), Empty Score \(emptyScore)")
     }
     
-    init(weights: ScoreWeights, smoothFactor: Double, emptyScore: Double, smoothZeroes: Bool = false){
+    init(precompute: Bool = true, weights: ScoreWeights, smoothFactor: Double, emptyScore: Double, smoothZeroes: Bool = false){
         self.smoothZeroes = smoothZeroes
-        super.init(preprocessEntries: {$0.val},
+        super.init(precompute: precompute,
+                   preprocessEntries: {$0.val},
                    weights: weights,
                    individualScore: {$0.val == 0 ? emptyScore : 0},
                    pairScore: {SmoothWeightedScoreFunction.pairScore(piece1: $0.val, piece2: $1.val,

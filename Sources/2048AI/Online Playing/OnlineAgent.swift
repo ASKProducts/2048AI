@@ -103,17 +103,15 @@ class OnlineAgent {
         let player = ExpectimaxPlayer(maxDepth: depth!,
                                       samplingAmount: samplingAmount!,
                                       cache: cache,
-                                      replicateStartingProbabilities: true,
+                                      replicateStartingProbabilities: false,
                                       parallel: false)
-
-
-        let scoreFunction = SmoothWeightedScoreFunction(weights: weights!,
+        let scoreFunction = SmoothWeightedScoreFunction(precompute: true,
+                                                        weights: weights!,
                                                         smoothFactor: smoothFactor!,
                                                         emptyScore: emptyScore!,
                                                         smoothZeroes: false)
 
 
-        let sf = WeightedScoreFunction(weights: weights!);
         let game = FastGame(startingProbabilities: startingProbabilities!, scoreFunc: scoreFunction)
         
         cache.initialize(player: player, game: game)

@@ -18,9 +18,11 @@ class FastScoreFunction: ScoreFunction {
     var rowScoresTable: [[Double]] = []
     var colScoresTable: [[Double]] = []
     
-    override init() {
+    init(precompute: Bool = true) {
         super.init()
-        precomputeTables()
+        if precompute{
+            precomputeTables()
+        }
     }
     
     func precomputeTables() {
@@ -50,20 +52,19 @@ class FastScoreFunction: ScoreFunction {
     }
     
     override func calculateScore(of game: Game) -> Double {
-        guard let game = game as? FastGame else{
-            fatalError("FastScoreFunction called with non-FastGame")
-        }
         var score = 0.0
-        //expanded out for (very) minor speed benefit
-        score += rowScoresTable[0][Int(game.getRow(0))]
-        score += rowScoresTable[1][Int(game.getRow(1))]
-        score += rowScoresTable[2][Int(game.getRow(2))]
-        score += rowScoresTable[3][Int(game.getRow(3))]
-        
-        score += colScoresTable[0][Int(game.getCol(0))]
-        score += colScoresTable[1][Int(game.getCol(1))]
-        score += colScoresTable[2][Int(game.getCol(2))]
-        score += colScoresTable[3][Int(game.getCol(3))]
+        if let game = game as? FastGame{
+            for i in 0..<3{
+                score += rowScoresTable[i][Int(game.getRow(i))]
+                score += colScoresTable[i][Int(game.getCol(i))]
+            }
+        }
+        else{
+            for i in 0..<3{
+                score += rowScore(row: i, entries: (0..<3).map{Double(game.piece(i, $0))})
+                score += colScore(col: i, entries: (0..<3).map{Double(game.piece($0, i))})
+            }
+        }
         
         return score
         
