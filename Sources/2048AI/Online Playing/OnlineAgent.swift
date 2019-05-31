@@ -105,10 +105,15 @@ class OnlineAgent {
                                       cache: cache,
                                       replicateStartingProbabilities: true,
                                       parallel: false)
+
+
         let scoreFunction = SmoothWeightedScoreFunction(weights: weights!,
                                                         smoothFactor: smoothFactor!,
                                                         emptyScore: emptyScore!,
                                                         smoothZeroes: false)
+
+
+        let sf = WeightedScoreFunction(weights: weights!);
         let game = FastGame(startingProbabilities: startingProbabilities!, scoreFunc: scoreFunction)
         
         cache.initialize(player: player, game: game)
