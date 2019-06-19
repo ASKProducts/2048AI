@@ -114,7 +114,43 @@ class FastGame: Game {
     
     static var hasPrecomputedTables = false
     
+    static let precomputedTablesFilename = "tables.precomputed"
+    
     static func precomputeTables(){
+        
+        precomputeTablesOnMachine()
+        hasPrecomputedTables = true
+        
+    }
+    
+    
+    static func readTablesFromFile(){
+        
+        guard let contents = try? String(contentsOfFile: precomputedTablesFilename) else{
+            precomputeTablesOnMachine()
+            storeTablesInFile()
+            return
+        }
+        
+        for (i, numStr) in contents.split(separator: " ").enumerated(){
+            guard let num = UInt16(numStr) else { continue }
+            switch i{
+            case 0...0xFFFF:
+                shiftRowRightTable.append(num)
+            case 0xFFFF+1...2*0xFFFF+1:
+                shiftRowLeftTable.append(num)
+            case 2*0xFFFF+2...3*0xFFFF+3:
+                shiftColUpTable.append(num)
+            case 3*0xFFFF+4...4*0xFFFF+4:
+                shiftColDownTable.append(num)
+            default: break
+            }
+        }
+        
+    }
+    
+    static func precomputeTablesOnMachine(){
+        
         
         shiftRowRightTable = [UInt16](repeating: 0, count: 0xFFFF+1)
         shiftRowLeftTable = [UInt16](repeating: 0, count: 0xFFFF+1)
@@ -165,6 +201,7 @@ class FastGame: Game {
             shiftedRow |= UInt16(compressedEntries[2] << (4*1))
             shiftedRow |= UInt16(compressedEntries[3] << (4*0))
             
+            
             shiftRowLeftTable[Int(row)] = shiftedRow
             shiftRowRightTable[Int(reverseRow(row))] = reverseRow(shiftedRow)
             shiftColUpTable[Int(row)] = shiftedRow
@@ -172,7 +209,18 @@ class FastGame: Game {
             
         }
         
-        hasPrecomputedTables = true
+    }
+    
+    static func storeTablesInFile(){
+        
+        var str = ""
+        str += shiftRowRightTable.map{"\($0)"}.joined(separator: " ") + " "
+        str += shiftRowLeftTable.map{"\($0)"}.joined(separator: " ") + " "
+        str += shiftColUpTable.map{"\($0)"}.joined(separator: " ") + " "
+        str += shiftColDownTable.map{"\($0)"}.joined(separator: " ")
+        let file = FileHandle(forWritingAtPath: precomputedTablesFilename)!
+        file.write(str.data(using: .utf8)!)
+        
     }
     
     override func duplicate() -> Game {
@@ -244,6 +292,7 @@ class FastGame: Game {
     }
     
     override func makeMove(_ move: Move) -> Bool {
+        
         if !canMove(move) { return false }
         
         switch move {
@@ -274,7 +323,7 @@ class FastGame: Game {
             let col4 = FastGame.shiftColDownTable[Int(getCol(3))]
             board = FastGame.buildBoardFromCols(col1, col2, col3, col4)
         default:
-            fatalError("makeMove(:) called with invalid error")
+            fatalError("makeMove(:) called with invalid move")
         }
         
         refreshAvailableSpots()

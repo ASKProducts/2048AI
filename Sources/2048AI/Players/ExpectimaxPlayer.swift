@@ -39,7 +39,9 @@ class ExpectimaxPlayer: Player{
     }
     
     override func decide(game: Game) -> Move {
-        cache?.updateCache(game: game)
+        if game.turnNumber % 10 == 0{
+            cache?.updateCache(game: game)
+        }
         hits = 0
         let choice = pi(game: game, depth: 0)
         if cache != nil && printHitCount {
@@ -167,12 +169,14 @@ class ExpectimaxPlayer: Player{
             let waitSem = DispatchSemaphore(value: 0)
             
             for spot in availableSpots {
+                run(in: queue, group: group) {
                 for (piece, probability) in startingProbabilities {
-                    run(in: queue, group: group) {
+                    //run(in: queue, group: group) {
                         let gameAfterAddingPiece = newGame.duplicate()
                         _ = gameAfterAddingPiece.addNewPiece(piece, at: spot)
                         value += self.score(game: gameAfterAddingPiece, depth: depth) * probability / Double(availableSpots.count)
-                    }
+                    //}
+                }
                 }
             }
             
