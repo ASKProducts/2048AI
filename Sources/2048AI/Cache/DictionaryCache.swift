@@ -21,6 +21,8 @@ class DictionaryCache: Cache {
     var player: ExpectimaxPlayer? = nil
     let semaphore: DispatchSemaphore = DispatchSemaphore(value: 1)
     
+    var maxDepthSoFar = 1
+    
     
     func initialize(player: ExpectimaxPlayer, game: Game) {
         self.player = player
@@ -47,8 +49,10 @@ class DictionaryCache: Cache {
             fatalError("player was never initialized")
         }
         
+        maxDepthSoFar = max(maxDepthSoFar, player.maxDepth)
+        
         for (key, _) in cache {
-            if key.game.turnNumber < game.turnNumber - player.maxDepth {
+            if key.game.turnNumber < game.turnNumber - maxDepthSoFar {
                 toRemoveKeys.append(key)
             }
         }

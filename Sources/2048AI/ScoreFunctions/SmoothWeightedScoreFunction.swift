@@ -40,7 +40,7 @@ class SmoothWeightedScoreFunction: CompoundScoreFunction {
     static func pairScore(piece1: Double, piece2: Double, smoothFactor: Double, smoothZeroes: Bool) -> Double{
         if smoothZeroes || (piece1 != 0 && piece2 != 0) {
             //let smallestExp = [piece1, piece2].map{log2($0 + 1)}.min()!
-            return smoothFactor * logDist(a: piece1, b: piece2)
+            return  smoothFactor * logDist(a: piece1, b: piece2)
         }
         return 0
     }

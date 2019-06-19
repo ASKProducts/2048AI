@@ -327,7 +327,7 @@
 			path = ScoreFunctions;
 			sourceTree = "<group>";
 		};
-		OBJ_5 /*  */ = {
+		OBJ_5 = {
 			isa = PBXGroup;
 			children = (
 				OBJ_6 /* Package.swift */,
@@ -337,7 +337,6 @@
 				OBJ_55 /* Dependencies */,
 				OBJ_97 /* Products */,
 			);
-			name = "";
 			sourceTree = "<group>";
 		};
 		OBJ_50 /* Tests */ = {
@@ -652,9 +651,10 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
-			mainGroup = OBJ_5 /*  */;
+			mainGroup = OBJ_5;
 			productRefGroup = OBJ_97 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

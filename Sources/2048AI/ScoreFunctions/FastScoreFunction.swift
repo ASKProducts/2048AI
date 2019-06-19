@@ -21,11 +21,21 @@ class FastScoreFunction: ScoreFunction {
     let precompute: Bool
     var donePrecomputing: Bool = false
     
+    let precomputeInParallel = false
+    
     init(precompute: Bool = true) {
         self.precompute = precompute
         super.init()
         if precompute{
-            DispatchQueue.global().async {
+            if precomputeInParallel{
+                DispatchQueue.global(qos: .userInteractive).async {
+                    self.precomputeTables()
+                    self.donePrecomputing = true
+                    print("done")
+                    print(timeSince(s))
+                }
+            }
+            else{
                 self.precomputeTables()
                 self.donePrecomputing = true
             }
