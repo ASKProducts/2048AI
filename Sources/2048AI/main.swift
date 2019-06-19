@@ -58,3 +58,5 @@ ScoreFunctionTester(scoreFunctions: [sf],
 }
 
 dispatchMain()
+
+
