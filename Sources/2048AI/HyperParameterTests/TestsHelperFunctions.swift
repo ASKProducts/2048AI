@@ -41,3 +41,11 @@ func time(_ f: () -> ()) -> Double {
     let timeTaken = Double(end.uptimeNanoseconds - start.uptimeNanoseconds)/1_000_000_000
     return timeTaken
 }
+
+func timeAsString(duration: Double) -> String{
+    let hours = Int(floor(duration/3600.0))
+    let minutes = Int(floor(duration/60)) % 60
+    let seconds = floor((duration - floor(duration/60)*60)*100)/100.0
+    let durationString = String(format: "%02d:%02d:%04.1f", hours, minutes, seconds)
+    return durationString
+}

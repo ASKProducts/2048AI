@@ -95,11 +95,8 @@ class ScoreFunctionTester{
                     print("Ending game \(j+1)/\(self.gamesPerTrial) in Score Function \(i+1):")
                     print("Final Board:")
                     print(game)
-                    let hours = Int(floor(duration/3600.0))
-                    let minutes = Int(floor(duration/60)) % 60
-                    let seconds = floor((duration - floor(duration/60)*60)*100)/100.0
-                    let durationString = String(format: "%02d:%02d:%04.1f", hours, minutes, seconds)
-                    print("Game Lasted \(duration) Seconds. (\(durationString))")
+                    
+                    print("Game Lasted \(duration) Seconds. (\(timeAsString(duration: duration)))")
                     
                     print("Total Time Elapsed: \(timeSince(start))")
                     

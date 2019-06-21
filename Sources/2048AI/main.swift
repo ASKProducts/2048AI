@@ -13,12 +13,28 @@ let agent = OnlineAgent()
 agent.playGame()
 */
 
+WeightsFinder(gamesPerTrial: 10,
+              weightRange: 0...10,
+              emptyScore: 100,
+              smoothFactor: 20,
+              chooser: {_ in (1, 16)},
+              useParallelInGames: true,
+              startingProbabilities: [2: 0.9, 1: 0.1],
+              replicateStartingProbabilties: false,
+              printInterval: 0).run(iterations: 3) {
+                exit(0)
+}
+
+dispatchMain()
+
+/*
+
 let s = DispatchTime.now()
 
 let weights: ScoreWeights = [[0, 0, 0, 0],
-                             [0, 0, 0, 1],
-                             [0, 0, 0.2, 1],
-                             [0, 1, 2, 4], ]
+                             [0, 0, 0, 0],
+                             [0, 0, 0, 0],
+                             [0, 0, 0, 4], ]
 
 let lw = [0.7837296541192433, 1.7716042130053955, 2.278206884723587, 3.1554465426145732]
 let sf = SmoothWeightedScoreFunction(precompute: true,
@@ -48,15 +64,16 @@ func chooser(game: Game) -> (Int, Int) {
 
 ScoreFunctionTester(scoreFunctions: [sf],
                     chooser: {_ in (1,16)},
-                    gamesPerTrial: 10,
-                    testInParallel: true,
+                    gamesPerTrial: 30,
+                    testInParallel: false,
                     useParallelInGames: true, //0.234 at 100
                     startingProbabilities: [2: 0.9, 4: 0.1],
                     replicateStartingProbabilties: false,
-                    printInterval: 1).runTests {
+                    printInterval: 0).runTests {
                         exit(0)
 }
 
 dispatchMain()
 
 
+*/

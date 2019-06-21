@@ -31,8 +31,6 @@ class FastScoreFunction: ScoreFunction {
                 DispatchQueue.global(qos: .userInteractive).async {
                     self.precomputeTables()
                     self.donePrecomputing = true
-                    print("done")
-                    print(timeSince(s))
                 }
             }
             else{
