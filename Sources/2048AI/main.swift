@@ -14,12 +14,13 @@ agent.playGame()
 */
 
 WeightsFinder(gamesPerTrial: 10,
-              weightRange: 0...10,
-              emptyScore: 100,
-              smoothFactor: 20,
+              initialWeights: convertLightWeights([1, 2, 3, 4]),
+              weightRange: -1...10,
+              emptyScore: 20,
+              smoothFactor: 5,
               chooser: {_ in (1, 16)},
               useParallelInGames: true,
-              startingProbabilities: [2: 0.9, 1: 0.1],
+              startingProbabilities: [2: 0.9, 4: 0.1],
               replicateStartingProbabilties: false,
               printInterval: 0).run(iterations: 3) {
                 exit(0)

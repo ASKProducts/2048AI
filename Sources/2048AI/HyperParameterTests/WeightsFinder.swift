@@ -12,6 +12,8 @@ struct WeightsFinder{
     let gamesPerTrial: Int
     let positionOrder: [(r: Int,c: Int)] = [(3,3), (2,3), (3,2), (1,3), (2, 2), (3, 1), (0, 3), (1, 2), (2, 1), (3, 0), (0, 2), (1, 1), (2, 0), (1,0), (0, 1), (0, 0)]
     
+    let initialWeights: ScoreWeights
+    
     let weightRange: ClosedRange<Int>
     
     let emptyScore: Double
@@ -27,9 +29,10 @@ struct WeightsFinder{
     let printInterval: Int
     
     
+    
     func run(iterations: Int, completion: () -> ()){
         
-        var weights = Array(repeating: Array(repeating: 0.0, count: 4), count: 4)
+        var weights = initialWeights
         
         var bestWeights: ScoreWeights? = nil
         var bestGM: Double? = nil
@@ -91,16 +94,18 @@ struct WeightsFinder{
                         }
                         
                         highestPieces.append(Double(highestPiece))
-                        print("Highest pieces for weight \(w) in position \(pos) so far: \(highestPieces)")
+                        print("Highest pieces for weight \(w) in position \(pos) so far: \(highestPieces) (gm of \(geometricMean(highestPieces)))")
                         
                     }
                     
                     let gm = geometricMean(highestPieces)
                     results.append((weight: w, gm: gm))
                     print("Geometric mean for weight \(w) in position \(pos) is \(gm)")
+                    
+                    print("Results so far for weights in position \(pos): \(results)")
                 }
                 
-                let bestResult = results.max(by: {$0.1 > $1.1})!
+                let bestResult = results.max(by: {$0.1 < $1.1})!
                 
                 print("Best weight for position \(pos) was \(bestResult.weight) with gm \(bestResult.gm)")
                 

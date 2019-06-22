@@ -9,6 +9,9 @@
 import Foundation
 
 typealias ScoreWeights = [[Double]]
+func constantScoreWeights(_ value: Double)  -> ScoreWeights {
+    return Array(repeating: Array(repeating: value, count: 4), count: 4)
+}
 
 class WeightedScoreFunction: ScoreFunction{
     

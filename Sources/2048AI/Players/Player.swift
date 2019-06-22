@@ -38,7 +38,10 @@ class Player {
             
             //if printInterval != 0 && numMoves % printInterval == 0 { print("Move Chosen: \(move)") }
             let attempt = game.makeMove(move)
-            if !attempt { print("Player made an invalid move") }
+            if !attempt {
+                print("Player made an invalid move")
+                
+            }
             
             _ = game.addNewRandomPiece()
             if printInterval != 0 && game.turnNumber % printInterval == 0 {
