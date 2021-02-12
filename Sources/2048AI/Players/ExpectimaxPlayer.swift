@@ -143,8 +143,14 @@ class ExpectimaxPlayer: Player{
     }
     
     func V(game: Game, move: Move, depth: Int) -> Double {
+        
         let newGame = game.duplicate()
         _ = newGame.makeMove(move)
+        
+        if depth == maxDepth {
+            return newGame.score
+        }
+        
         var availableSpots = newGame.availableSpots
         
         while availableSpots.count > samplingAmount {
