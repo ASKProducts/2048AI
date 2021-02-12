@@ -15,10 +15,11 @@ agent.playGame()
 
 let innerSF = FastPowerScoreFunction(exponent: 2)
 //let innerSF = FastWeightedScoreFunction(lightWeights: [1,2,3,4])
-let innerSF2 = FastWeightedScoreFunction(lightWeights: [1,2,3,4], mergeFactor: 5, preprocessEntries: nil)
-let sf = AveragedRandomScoreFunction(rounds: 10, innerScoreFunction: innerSF, moveLimit: 10)
+let innerSF2 = FastWeightedScoreFunction(lightWeights: [0.1,0.1,0.1,0.1], mergeFactor: 0, preprocessEntries: {$0*$0 + ($0 == 0 ? 1000 : 0)})
+
+let sf = AveragedRandomScoreFunction(rounds: 10, innerScoreFunction: innerSF2, moveLimit: 50)
 let player = ExpectimaxPlayer(maxDepth: 1,
-                              samplingAmount: 3,
+                              samplingAmount: 5,
                               cache: DictionaryCache(),
                               printHitCount: false,
                               replicateStartingProbabilities: true,
